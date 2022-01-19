@@ -1,8 +1,10 @@
 import React from 'react'
+import { LandingHeader } from './LandingHeader'
 
 export default function Landing() {
   return (
     <div>
+      <LandingHeader/>
       <header id="showcase">
     <h1>Welcome To Movie Knight</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi officiis ipsum officia numquam expedita ullam.</p>

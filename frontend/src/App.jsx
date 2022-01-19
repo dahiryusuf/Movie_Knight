@@ -7,6 +7,9 @@ import { Header }  from './components/Header';
 import {Carousal} from './components/Carousal';
 import GenreTabs from './components/GenreTabs';
 import Landing from './components/Landing';
+import Signup from './components/Signup';
+import Signin from './components/Signin';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const [movie, setMovie] = useState([]);
@@ -47,7 +50,15 @@ function App() {
 );
          </div>} >
             </Route>
-            <Route path = "/" element = {<Landing></Landing>} ></Route>
+            <Route path = "/" element = { 
+             <Landing></Landing> }
+             ></Route>
+             <Route path = "/signup" element = { 
+             <Signup></Signup> }
+             ></Route>
+             <Route path = "/signin" element = { 
+             <Signin></Signin> }
+             ></Route>
           </Routes>
 
       </div>

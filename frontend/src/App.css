@@ -74,7 +74,7 @@ input:focus {
 
 /* Header Styles */
 header {
-  background-color: var(--primary);
+  background-color: #926239;
 }
 
 header .inner-content {
@@ -304,7 +304,7 @@ body{
 }
 
 #showcase{
-  background-image:url('https://images.unsplash.com/photo-1461151304267-38535e780c79?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80');
+  background-image:url('https://github.com/dahiryusuf/final_project/blob/master/frontend/public/shutterstock_1361799455.jpg?raw=true');
   background-size:cover;
   background-position:center;
   height:100vh;
@@ -314,6 +314,7 @@ body{
   align-items:center;
   text-align:center;
   padding:0 20px;
+  color: white;
 }
 
 #showcase h1{
@@ -328,8 +329,8 @@ body{
 #showcase .button{
   font-size:18px;
   text-decoration:none;
-  color:#926239;
-  border:#926239 1px solid;
+  color:#f8f4f0;
+  border:white 1px solid;
   padding:10px 20px;
   border-radius:10px;
   margin-top:20px;
