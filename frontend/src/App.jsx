@@ -7,6 +7,7 @@ import { Header }  from './components/Header';
 import {Carousal} from './components/Carousal';
 import GenreTabs from './components/GenreTabs';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   const [movie, setMovie] = useState([]);
   const [movies, setMovies] = useState([]);
@@ -33,13 +34,14 @@ function App() {
 
   return (
     <div className="App">
+       <Header /> 
           <Routes>
             <Route path = "/newparty" element = {<NewWatchParty></NewWatchParty>} >
             </Route>
             <Route path = "/" element = {
               <div>
            <div>
-     <Header /> 
+    
      <Carousal movie = {movie}></Carousal>
        <GenreTabs movie = {movie} action ={action}></GenreTabs>
     </div>
