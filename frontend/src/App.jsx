@@ -6,6 +6,10 @@ import NewWatchParty from './components/NewWatchParty';
 import { Header }  from './components/Header';
 import {Carousal} from './components/Carousal';
 import GenreTabs from './components/GenreTabs';
+import Landing from './components/Landing';
+import Signup from './components/Signup';
+import Signin from './components/Signin';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -34,20 +38,28 @@ function App() {
 
   return (
     <div className="App">
-       <Header /> 
           <Routes>
-            <Route path = "/newparty" element = {<NewWatchParty></NewWatchParty>} >
+            <Route path = "/newparty" element = {<div><Header/> <NewWatchParty></NewWatchParty></div>} >
             </Route>
-            <Route path = "/" element = {
+            <Route path = "/home" element = {
               <div>
            <div>
-    
+    <Header/>
      <Carousal movie = {movie}></Carousal>
        <GenreTabs movie = {movie} action ={action}></GenreTabs>
     </div>
 );
          </div>} >
             </Route>
+            <Route path = "/" element = { 
+             <Landing></Landing> }
+             ></Route>
+             <Route path = "/signup" element = { 
+             <Signup></Signup> }
+             ></Route>
+             <Route path = "/signin" element = { 
+             <Signin></Signin> }
+             ></Route>
           </Routes>
 
       </div>

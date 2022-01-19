@@ -3,6 +3,7 @@ import Calendar from 'react-calendar'
 import { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import '../NewWatchParty.css'
+import { Header } from './Header'
 
 export default function NewWatchParty() {
   const [value, onChange] = useState(new Date());
@@ -20,6 +21,8 @@ export default function NewWatchParty() {
          <br/>
           <button type="submit" className="btn btn-primary">Generate Link</button>
     </div>
+ 
+
     </div>
   )
 }
