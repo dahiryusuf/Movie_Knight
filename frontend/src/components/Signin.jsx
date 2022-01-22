@@ -1,4 +1,8 @@
 import React from 'react'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -19,7 +23,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Movie Knight
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -29,15 +33,31 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
 export default function SignIn() {
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
+  const [cookies, setCookie] = useCookies(['user']);
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    axios.get("http://localhost:3001/api/users/").then((res,req) => {
+      let email = data.get('email')
+      let password = data.get('password')
+      console.log(res.data.first_name);
+      for (let i of res.data){
+       if(i.email === email && i.password === password){
+        setCookie('Name', i.id, { path: '/' });
+       return navigate("/home");
+       }
+      }
+      setError(true)
+      setMessage("Incorrect entry try again")
+      
+  })
+  .catch((err) => console.log(error))
   };
 
   return (
@@ -79,11 +99,14 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
+                error = {error}
+                helperText = {message}
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus
+                
               />
               <TextField
                 margin="normal"
@@ -114,7 +137,7 @@ export default function SignIn() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

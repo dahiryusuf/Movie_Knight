@@ -33,6 +33,16 @@ module.exports = (db) => {
           .then(result => result.rows[0])
           .catch(err => err);
   }
+  const addWatchParty = (link, message, date, userId) => {
+    const query = {
+        text: `INSERT INTO watch_parties(link, messages, party_date, user_id) VALUES ($1, $2, $3, $4) RETURNING *` ,
+        values: [link, message, date, userId]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+}
 
   const getUsersPosts = () => {
       const query = {
@@ -66,6 +76,7 @@ module.exports = (db) => {
       getUserByEmail,
       addUser,
       getUsersPosts,
-      getUsersWatchLists
+      getUsersWatchLists,
+      addWatchParty
   };
 };

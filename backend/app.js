@@ -7,14 +7,12 @@ const dbHelpers = require('./helpers/dbHelpers')(db)
 const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const watchPartiesRouter = require('./routes/watchParties');
+
 
 const app = express();
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-})
+app.use(cors())
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
-
+app.use('/api',watchPartiesRouter(dbHelpers));
 
 
 app.get("/api/candidates", (req,res) => {

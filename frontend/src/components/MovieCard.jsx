@@ -10,7 +10,7 @@ export const MovieCard = (props) => {
         src={`https://image.tmdb.org/t/p/w200${props.poster}`}
         alt={`${props.title} Poster`}
       />
-      <MovieControls  />
+      <MovieControls page = {props.page} />
     </div>
   );
 };

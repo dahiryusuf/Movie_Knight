@@ -1,5 +1,5 @@
 INSERT INTO
-watch_parties(link,messages, party_date, user_id)
+watch_parties(link, messages, party_date, user_id)
 VALUES
   (
         'http://localhost:3000/watch_party/1',

@@ -10,6 +10,8 @@ import Landing from './components/Landing';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import WatchList from './components/WatchList';
+import PickMovie from './components/PickMovie';
+import MoviePicker from './components/MoviePicker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -63,6 +65,12 @@ function App() {
              ></Route>
              <Route path = "/watchlist" element = { 
              <WatchList movie = {movie}></WatchList> }
+             ></Route>
+              <Route path = "/pickmovie" element = { 
+            <PickMovie movie = {movie} action ={action}></PickMovie> }
+             ></Route>
+                  <Route path = "/moviepicker" element = { 
+            <MoviePicker movie = {movie} action ={action}></MoviePicker> }
              ></Route>
           </Routes>
 

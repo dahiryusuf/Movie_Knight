@@ -1,33 +1,57 @@
 import React from "react";
-import "../App.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { MovieCard } from "./MovieCard";
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import '../NewWatchParty.css'
 
-
-export default function GenreTabs(props) {
+export default function PickMovie(props) {
   console.log('movieList', props)
   const parsedMovies = props.movie.map(movie => <MovieCard key={movie.id}
    poster={movie.poster_path} 
-    title={movie.title}
-    page = {false} 
+    title={movie.title} 
+    page = {true} 
     />);
     const parsedAction = props.action.map(movie => <MovieCard key={movie.id}
       poster={movie.poster_path} 
-       title={movie.title} 
+       title={movie.title}
+       page = {true} 
        />);
+       
+       const now = 60;
 
+       
   return (
-    
+    <div>
+      <div className = 'card'>
+<Card >
+  <Card.Header as="h5">MovieKnight</Card.Header>
+  <Card.Body>
+    <Card.Title>Pick Your Movies</Card.Title>
+    <Card.Text>
+      You have 4 movies to go
+    </Card.Text>
+    <ProgressBar  animated now={now} label={`${now}%`} />
+    <br/>
+    <Button variant="primary" size="lg" disabled>
+    Done
+  </Button>{' '}
+  </Card.Body>
+
+</Card>
+</div>
     <Tabs>
     <TabList>
+      <Tab>WatchList</Tab>
       <Tab>Trending</Tab>
       <Tab>Action</Tab>
       <Tab>Adventure</Tab>
       <Tab>Animation</Tab>
       <Tab>Comedy</Tab>
       {/* <Tab>Crime</Tab>
-      <Tab>Documentary</Tab>
+      <Tab>WatchList</Tab>
       <Tab>Drama</Tab>
       <Tab>Family</Tab>
       <Tab>Fantasy</Tab>
@@ -52,7 +76,18 @@ export default function GenreTabs(props) {
 
 </div>
 </div>
-       
+</TabPanel>
+<TabPanel>
+      <div className="movie-page">
+<div className="container">
+  <div className="header">
+  </div>
+    <div className="movie-grid">
+    {parsedMovies}
+    </div>
+
+</div>
+</div>
       
    
     </TabPanel>
@@ -111,5 +146,6 @@ export default function GenreTabs(props) {
    
     </TabPanel>
   </Tabs>
+  </div>
 );
 }
