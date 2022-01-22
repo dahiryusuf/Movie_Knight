@@ -1,9 +1,21 @@
-import React from "react";
+import {React, useEffect, useState} from "react";
 import { MovieCard } from "./MovieCard";
 import { Header } from "./Header";
+import axios from "axios";
+
 
 export default function WatchList(props) {
-  const parsedMovies = props.movie.map(movie => <MovieCard key={movie.id}
+  const [watchlist, setWatchlist] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/users/watchlist/1").then((res,req) => {
+    setWatchlist(res.data)
+  })
+  }, [])
+  console.log('watch',watchlist)
+  console.log('props',props.movie)
+
+  const parsedMovies = watchlist.map(movie => <MovieCard key={movie.id}
    poster={movie.poster_path} 
     title={movie.title} 
     />);

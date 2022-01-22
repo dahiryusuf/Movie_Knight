@@ -3,10 +3,16 @@ import { MovieCard } from "./MovieCard";
 
 export default function MovieList(props) {
   console.log('movieList', props)
-  const parsedMovies = props.dahir.map(movie => <MovieCard key={movie.id}
+  const parsedMovies = props.movie.map(movie => <MovieCard key={movie.id}
    poster={movie.poster_path} 
     title={movie.title} 
+    vote_average = {movie.vote_average}
+    release_date = {movie.release_date}
+    overview = {movie.overview}
+
     />);
+    console.log('movieList', props)
+    
   return (
 
 <div className="movie-page">
