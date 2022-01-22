@@ -1,19 +1,62 @@
-import React from "react";
+import {React, useEffect,useState} from "react";
 import "../App.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { MovieCard } from "./MovieCard";
+// import useGenre from "../hooks/useGenre";
+import axios from "axios";
 
 
 export default function GenreTabs(props) {
-  console.log('movieList', props)
+
+  const [result, setResult] = useState({
+    data: {},
+    loading: true,
+    error: null
+  })
+
+// const results = useGenre("https://api.themoviedb.org/3/trending/movie/day?api_key=79ea73dd8ffddae85c10ba47e73e9093")
+
+const useGenre = (url) => {
+  
+  useEffect(() => {
+    axios.get(url)
+      .then((res) => {
+        setResult({
+          data: res.data.results,
+          loading: false,
+          error: null
+        })
+      })
+      .catch(err => {
+        setResult(prev => ({
+          ...prev,
+          loading: false,
+          error: err.message
+        }))
+      })
+  }, [url])
+
+};
+
+// const hufan = result.data
+// console.log('hufan', hufan)
+// console.log('pop', props.action)
   const parsedMovies = props.movie.map(movie => <MovieCard key={movie.id}
    poster={movie.poster_path} 
     title={movie.title} 
+    vote_average = {movie.vote_average}
+    release_date = {movie.release_date}
+    overview = {movie.overview}
+    id = {movie.id}
+    
     />);
     const parsedAction = props.action.map(movie => <MovieCard key={movie.id}
       poster={movie.poster_path} 
        title={movie.title} 
+       vote_average = {movie.vote_average}
+       release_date = {movie.release_date}
+       overview = {movie.overview}
        />);
 
   return (
@@ -40,7 +83,7 @@ export default function GenreTabs(props) {
 
     </TabList>
 
-    <TabPanel>
+    <TabPanel onClick={useGenre("https://api.themoviedb.org/3/trending/movie/day?api_key=79ea73dd8ffddae85c10ba47e73e9093")} >
       <div className="movie-page">
 <div className="container">
   <div className="header">
@@ -55,7 +98,7 @@ export default function GenreTabs(props) {
       
    
     </TabPanel>
-    <TabPanel>
+    <TabPanel onClick={useGenre("https://api.themoviedb.org/3/discover/movie?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=28&with_watch_monetization_types=flatrate")}>
     <div className="movie-page">
 <div className="container">
   <div className="header">

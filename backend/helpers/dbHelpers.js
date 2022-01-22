@@ -32,7 +32,19 @@ module.exports = (db) => {
       return db.query(query)
           .then(result => result.rows[0])
           .catch(err => err);
-  }
+  }       
+
+
+  const addToUserWatchlist = ( movie_id, user_id) => {
+    const query = {
+        text: `INSERT INTO watch_lists (movie_id, user_id) VALUES ($1, $2) RETURNING *` ,
+        values: [movie_id, user_id]
+    }
+
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+} 
 
   const getUsersPosts = () => {
       const query = {
@@ -61,11 +73,25 @@ module.exports = (db) => {
 
 }
 
+const getUserWatchList = (id) => {
+    const query = {
+        text: (`SELECT * FROM watch_lists WHERE user_id = ${id};`)
+    }
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+
+}
+
   return {
       getUsers,
       getUserByEmail,
       addUser,
       getUsersPosts,
-      getUsersWatchLists
+      getUsersWatchLists,
+      addToUserWatchlist,
+      getUserWatchList
+
   };
 };

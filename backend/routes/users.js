@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const {
     getPostsByUsers,
-    getWatchListByUsers
+    getWatchListByUsers,
+    getWatchListByUser
+    
 } = require('../helpers/dataHelpers');
 
 module.exports = ({
@@ -10,7 +12,9 @@ module.exports = ({
     getUserByEmail,
     addUser,
     getUsersPosts,
-    getUsersWatchLists
+    getUsersWatchLists,
+    addToUserWatchlist,
+    getUserWatchList
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -31,6 +35,20 @@ module.exports = ({
                 error: err.message
             }));
     });
+
+    router.get('/watchlist/:id', (req, res) => {
+        console.log(req.params)
+        const id = req.params.id
+        getUserWatchList(id)
+            .then((watchlist) => { 
+                // const formattedPosts = getWatchListByUser(watchlist);
+                res.json(watchlist);
+            })
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+
     router.get('/watchlists', (req, res) => {
         getUsersWatchLists()
             .then((watchLists) => {
@@ -42,33 +60,22 @@ module.exports = ({
             }));
     });
 
-    router.post('/', (req, res) => {
+  
 
-        const {
-            first_name,
-            last_name,
-            email,
-            password
+    router.post('/watchlist/:id', (req, res) => {
+
+        const  {movie_id
         } = req.body;
 
-        getUserByEmail(email)
-            .then(user => {
+        const {user_id}= req.params;
 
-                if (user) {
-                    res.json({
-                        msg: 'Sorry, a user account with this email already exists'
-                    });
-                } else {
-                    return addUser(first_name, last_name, email, password)
-                }
-
-            })
-            .then(newUser => res.json(newUser))
+        addToUserWatchlist(movie_id, user_id)
+            .then()
             .catch(err => res.json({
                 error: err.message
             }));
-
     })
+
 
     return router;
 };

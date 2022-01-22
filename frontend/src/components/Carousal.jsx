@@ -7,10 +7,14 @@ import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 export const Carousal = (props) => {
 
 
-  const trending = props.movie.slice(7, 10).map((item) => {
+  const trending = props.movie.slice(7, 10).map((item) => {   
+ 
     return (
+  
       <Carousel.Item>
+         
       <img 
+       
         className="d-block w-100"
         style={{ height: 600 }}
         src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`}
@@ -19,7 +23,8 @@ export const Carousal = (props) => {
     </Carousel.Item>
     );
   });
-  console.log(props)
+  
+
   return (
     <Carousel>
 {trending}

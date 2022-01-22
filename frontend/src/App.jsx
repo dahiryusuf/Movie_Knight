@@ -10,6 +10,7 @@ import Landing from './components/Landing';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import WatchList from './components/WatchList';
+// import useGenre from './hooks/useGenre';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,14 +19,17 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [action, setAction] = useState([]);
 
+
+
   useEffect(() => {
     axios.get("http://localhost:3001/api/users/watchlists").then((res,req) => {
     axios.get(`https://api.themoviedb.org/3/movie/${res.data[1].moviesInWatchList[1].movieId}?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US`).then((res,req) => {
-     console.log(res.data) 
+    //  console.log(res.data) 
     setMovies(res.data)
   })
 })
   }, [])
+
   useEffect(() => {
     axios.get("https://api.themoviedb.org/3/trending/movie/day?api_key=79ea73dd8ffddae85c10ba47e73e9093").then((res,req) => {
 

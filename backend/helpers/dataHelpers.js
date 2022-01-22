@@ -44,7 +44,30 @@ const getWatchListByUsers = (WatchLists) => {
   return Object.values(UsersWatchLists);
 };
 
+  
+  
+  const getWatchListByUser = (post) => {
+    const UsersWatchLists = {};
+  
+   
+        if (!UsersWatchLists[post.user_id]) {
+            UsersWatchLists[post.user_id] = {
+                userId: post.user_id,
+                moviesInWatchList: [],
+            };
+        
+  
+        UsersWatchLists[post.user_id].moviesInWatchList.push({
+            movieId: post.movie_id,
+        });
+  
+    }
+  
+    return Object.values(UsersWatchLists);
+  };
 module.exports = {
   getPostsByUsers,
-  getWatchListByUsers
+  getWatchListByUsers,
+  getWatchListByUser
+
 };
