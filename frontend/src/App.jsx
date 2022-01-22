@@ -44,12 +44,12 @@ function App() {
   return (
     <div className="App">
           <Routes>
-            <Route path = "/newparty" element = {<NewWatchParty></NewWatchParty>} >
+            <Route path = "/newparty" element = {<div><Header/> <NewWatchParty></NewWatchParty></div>} >
             </Route>
             <Route path = "/home" element = {
               <div>
            <div>
-     <Header /> 
+    <Header/>
      <Carousal movie = {movie}></Carousal>
        <GenreTabs movie = {movie} action ={action}></GenreTabs>
     </div>
