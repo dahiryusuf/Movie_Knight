@@ -9,19 +9,37 @@ export const MovieCard = (props) => {
   const handleShow=()=>setShow(true);
   const handleClose=()=>setShow(false);
 
-  const addMovieToWatched = function(movie_id, user_id) {
-    axios.post(`http://localhost:3001/api/users/watchlist/${user_id}`, {
-      movie_id: movie_id}) 
-       .then(function (response) {
-       console.log(response);
-     })
-     .catch(function (error) {
-       console.log(error);
-     });
-   }
-   useEffect(() => {
-  addMovieToWatched(1234134, 1)
+  const addMovieToWatchList = function() {
+    axios.post('http://localhost:3001/api/users/watchlist/2', {
+    movie_id: '43253423',
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
   });
+   }
+
+   const handleSubmit = (event) => {
+    event.preventDefault();
+  
+  
+    const movie_id = props.id
+    axios.post('http://localhost:3001/api/users/watchlist/2', {
+      movie_id
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+  //  useEffect(() => {
+  // addMovieToWatchList()
+  // }, [show] ) ;
    
   return (
     <>
@@ -50,7 +68,7 @@ export const MovieCard = (props) => {
                       </Modal.Body>
                       <Modal.Footer>
                           <Button variant="primary" onClick={handleClose}>Close</Button>
-                          <Button variant="secondary" onClick={() => addMovieToWatched(props.movie_id, 1)}>Add</Button>
+                          <Button variant="secondary"onClick={handleSubmit} >Add</Button>
                       </Modal.Footer>
                   </Modal>
 

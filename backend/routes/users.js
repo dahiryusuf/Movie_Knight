@@ -41,7 +41,6 @@ module.exports = ({
         const id = req.params.id
         getUserWatchList(id)
             .then((watchlist) => { 
-                // const formattedPosts = getWatchListByUser(watchlist);
                 res.json(watchlist);
             })
             .catch((err) => res.json({
@@ -67,10 +66,10 @@ module.exports = ({
         const  {movie_id
         } = req.body;
 
-        const {user_id}= req.params;
+        const user_id = req.params.id;
 
         addToUserWatchlist(movie_id, user_id)
-            .then()
+            .then(newMovie => res.json(newMovie))
             .catch(err => res.json({
                 error: err.message
             }));
