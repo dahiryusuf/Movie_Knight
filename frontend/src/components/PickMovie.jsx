@@ -22,7 +22,7 @@ export default function PickMovie(props) {
     clearWatched,
     removeFromWatched
   } = useContext(GlobalContext);
-
+  
     let array = []
     let now = 0
     let index = 10 - watched.length

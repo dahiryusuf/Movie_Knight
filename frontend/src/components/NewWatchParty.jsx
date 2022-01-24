@@ -3,10 +3,10 @@ import Calendar from 'react-calendar'
 import { useState,useContext,useEffect } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import '../NewWatchParty.css'
-import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { GlobalContext } from "../context/GlobalState";
+import { Link} from "react-router-dom"
 
 export default function NewWatchParty() {
   const [value, onChange] = useState(new Date());
@@ -17,6 +17,13 @@ export default function NewWatchParty() {
     watched,
     clearWatched
   } = useContext(GlobalContext);
+
+
+const generateRandomString = () => {
+  let ranId = (Math.random() + 1).toString(36).substring(7);
+  return ranId;
+};
+
   let array =[]
   useEffect(() => {
     for(let i of watched) {
@@ -30,13 +37,19 @@ export default function NewWatchParty() {
  useEffect(() => {
   
  }, [])
+ const handleClick = (event) => {
+  event.preventDefault();
+
+ }
+
+
+ const link = generateRandomString()
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(message, value)
-    
+    // clearWatched()
+ let ids = 0
   
-  
-    const link = "testing"
     
     axios.post('http://localhost:3001/api/newparty', {
       link,
@@ -46,6 +59,18 @@ export default function NewWatchParty() {
     })
     .then(function (response) {
       console.log(response);
+      ids = response.data.id;
+      for(let i of watched){
+        axios.post(`http://localhost:3001/api/users/movielist/${ids}`, {
+          movie_id: i
+        })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
     })
     .catch(function (error) {
       console.log(error);
@@ -70,10 +95,16 @@ export default function NewWatchParty() {
         />
       </form>
       
-      <button className="btn btn-primary" onClick = {handleSubmit}>Pick Movies</button>
+      <button className="btn btn-primary" onClick = {handleSubmit}>Test submit</button>
       <br/>
       <br/>
-         <Link  className="btn btn-primary" to="/moviepicker">Generate Link</Link>
+      <Link  className="btn btn-primary" to= {`/link/${link}`} >Link Page</Link>
+      <br/>
+      <br/>
+      <Link  className="btn btn-primary" to= {`/pickmovie`} >pick movies</Link>
+      <br/>
+      <br/>
+         <Link  className="btn btn-primary" to= {`/moviepicker/${link}`} >Generate Link</Link>
           <br/>
           <br/>
           
