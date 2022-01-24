@@ -58,7 +58,7 @@ body {
 }
 
 .btn:hover {
-  background-color: #1aa762;
+  background-color: #f00606;
   opacity: 1;
   cursor: pointer;
 }
@@ -257,7 +257,7 @@ header .nav-links li:last-child {
 
 .movie-card .inner-card-controls {
   display: inline;
-  background-color: red;
+  background-color: rgb(19, 17, 17);
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -265,7 +265,7 @@ header .nav-links li:last-child {
   background: rgba(175, 15, 15, 0.8);
   border-radius: 5px;
   padding: 3px;
-  opacity: 0;
+  /* opacity: 0; */
   transition: all 0.3s ease;
 }
 

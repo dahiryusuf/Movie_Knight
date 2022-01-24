@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from "react";
-import { MovieCard } from "./MovieCard";
+import { MovieCard } from "./MovieCardWatchlist";
 import { Header } from "./Header";
 import axios from "axios";
 import { useCookies } from 'react-cookie';
@@ -14,13 +14,14 @@ export default function WatchList(props) {
     setWatchlist(res.data)
   })
   }, [])
-  console.log('watch',watchlist)
+
   console.log('props',props.movie)
 
 
   const parsedMovies = watchlist.map(movie => <MovieCard key={movie.id}
    poster={movie.poster_path} 
     title={movie.title} 
+    id = {movie.id}
     />);
   return (
 
@@ -35,6 +36,7 @@ export default function WatchList(props) {
     <div className="movie-grid">
     {parsedMovies}
     </div>
+    
 
 </div>
 </div>)

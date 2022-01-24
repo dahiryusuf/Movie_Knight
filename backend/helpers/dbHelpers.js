@@ -39,15 +39,10 @@ module.exports = (db) => {
         values: [link, message, date, userId]
   }       
 
-<<<<<<< HEAD
-
-  const addToUserWatchlist = ( movie_id,poster_path, user_id) => {
-=======
   }
-  const addToUserWatchlist = ( movie_id, user_id) => {
->>>>>>> b97d530cb8516102e2ca368855443955ace5939b
+  const addToUserWatchlist = ( movie_id,poster_path, user_id) => {
     const query = {
-        text: `INSERT INTO watch_lists (movie_id,poster_path, user_id) VALUES ($1, $2,$ 3) RETURNING *` ,
+        text: `INSERT INTO watch_lists (movie_id,poster_path, user_id) VALUES ($1, $2, $3) RETURNING *` ,
         values: [movie_id,poster_path, user_id]
     }
 
@@ -68,8 +63,8 @@ module.exports = (db) => {
       return db.query(query)
           .then(result => result.rows)
           .catch(err => err);
-
   }
+
   const getUsersWatchLists = () => {
     const query = {
         text: `SELECT users.id as user_id, first_name, last_name, email, watch_lists.id as watch_list_id, movie_id
@@ -94,6 +89,16 @@ const getUserWatchList = (id) => {
         .catch(err => err);
 
 }
+const removeFromWatchList = (movie_id) => {
+    const query = {
+        text: (`DELETE FROM watch_lists WHERE id = ${movie_id};`)
+    }
+    
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+}
 
   return {
       getUsers,
@@ -103,6 +108,7 @@ const getUserWatchList = (id) => {
       getUsersWatchLists,
       addWatchParty,
       addToUserWatchlist,
-      getUserWatchList
+      getUserWatchList,
+      removeFromWatchList
   }
 }

@@ -76,6 +76,8 @@ const handleRemove = (event) => {
   src={`https://image.tmdb.org/t/p/w200/${props.poster}`}
   alt={`${props.title} Poster`}
 />
+
+
 {props.pick ? <MovieControls movie = {props.id} /> : <></>}
 </div>
 <img
@@ -87,11 +89,11 @@ const handleRemove = (event) => {
 
       <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton >
-                        <Modal.Title></Modal.Title>
+                        
+                        <Modal.Title>         <h3>{props.title}</h3></Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                       <img className="card-img-top" style={{width:'14rem'}}   src={`https://image.tmdb.org/t/p/w200${props.poster}`}  alt={props.title}  />
-                      <h3>{props.title}</h3>
                       <h4>IMDb: {props.vote_average}</h4>
                       <h5>Release Date: {props.release_date}</h5>
                       <br></br>
@@ -99,8 +101,8 @@ const handleRemove = (event) => {
                       <p>{props.overview}</p>
                       </Modal.Body>
                       <Modal.Footer>
-                          <Button variant="primary" onClick={handleClose} >Close</Button>
-                          <Button variant="secondary"onClick={handleSubmit} disabled = {index}>Add</Button>
+                          <Button variant="secondary" onClick={handleClose} >Close</Button>
+                          <Button variant="primary"onClick={handleSubmit} disabled = {index}>Add</Button>
                       </Modal.Footer>
                   </Modal>
 
