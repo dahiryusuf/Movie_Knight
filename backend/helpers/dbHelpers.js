@@ -35,10 +35,10 @@ module.exports = (db) => {
   }       
 
 
-  const addToUserWatchlist = ( movie_id, user_id) => {
+  const addToUserWatchlist = ( movie_id,poster_path, user_id) => {
     const query = {
-        text: `INSERT INTO watch_lists (movie_id, user_id) VALUES ($1, $2) RETURNING *` ,
-        values: [movie_id, user_id]
+        text: `INSERT INTO watch_lists (movie_id,poster_path, user_id) VALUES ($1, $2,$ 3) RETURNING *` ,
+        values: [movie_id,poster_path, user_id]
     }
 
     return db.query(query)

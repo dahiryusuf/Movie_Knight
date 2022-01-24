@@ -9,25 +9,26 @@ export const MovieCard = (props) => {
   const handleShow=()=>setShow(true);
   const handleClose=()=>setShow(false);
 
-  const addMovieToWatchList = function() {
-    axios.post('http://localhost:3001/api/users/watchlist/2', {
-    movie_id: '43253423',
-  })
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-   }
+  // const addMovieToWatchList = function() {
+  //   axios.post('http://localhost:3001/api/users/watchlist/2', {
+  //   movie_id: '43253423',
+  // })
+  // .then(function (response) {
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
+  //  }
 
    const handleSubmit = (event) => {
     event.preventDefault();
   
   
     const movie_id = props.id
-    axios.post('http://localhost:3001/api/users/watchlist/2', {
-      movie_id
+    const poster_path = props.poster_path
+    axios.post('http://localhost:3001/api/users/watchlist/1', {
+      movie_id, poster_path
     })
     .then(function (response) {
       console.log(response);

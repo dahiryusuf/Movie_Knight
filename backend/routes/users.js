@@ -63,12 +63,13 @@ module.exports = ({
 
     router.post('/watchlist/:id', (req, res) => {
 
-        const  {movie_id
+        const  {movie_id, poster_path
         } = req.body;
 
         const user_id = req.params.id;
+        console.log(req.body)
 
-        addToUserWatchlist(movie_id, user_id)
+        addToUserWatchlist(movie_id, poster_path, user_id)
             .then(newMovie => res.json(newMovie))
             .catch(err => res.json({
                 error: err.message
