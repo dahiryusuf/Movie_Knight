@@ -6,6 +6,7 @@ import { MovieCard } from "./MovieCard";
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Offcanvas from 'react-bootstrap/Offcanvas'
 import { Modal} from 'react-bootstrap';
 import { GlobalContext } from "../context/GlobalState";
 import axios from "axios";
@@ -75,17 +76,14 @@ export default function PickMovie(props) {
   <Button variant="primary" onClick={handleShow} size="lg" >
     Picked Movies
   </Button>{' '}
-  <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton >
-                        <Modal.Title></Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                      {parsedMovies}
-                      </Modal.Body>
-                      <Modal.Footer>
-                          <Button variant="primary" onClick={handleClose} >Close</Button>
-                      </Modal.Footer>
-                  </Modal>
+  <Offcanvas show={show} onHide={handleClose} {...props}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+        {parsedMovies}
+        </Offcanvas.Body>
+      </Offcanvas>
   </Card.Body>
 
 </Card>

@@ -1,4 +1,4 @@
-import {React, useEffect,useState} from "react";
+import { React, useEffect, useState } from "react";
 import "../App.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -92,7 +92,7 @@ parsedWatchlist = props.watchlist.map(movie => <MovieCard key={movie.id}
  
 
   return (
-    
+
     <Tabs>
     <TabList>
      {props.page ? <Tab>Watchlist</Tab> : <></>} 

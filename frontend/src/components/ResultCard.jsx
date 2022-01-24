@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Moment from "react-moment";
 import { GlobalContext } from "../context/GlobalState";
+import axios from "axios";
 
 export const ResultCard = ({ movie }) => {
   const {
@@ -10,6 +11,21 @@ export const ResultCard = ({ movie }) => {
     watched,
   } = useContext(GlobalContext);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    const movie_id = movie.id
+    const poster_path = movie.poster_path
+    axios.post('http://localhost:3001/api/users/watchlist/1', {
+      movie_id, poster_path
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
   let storedMovie = watchlist.find((o) => o.id === movie.id);
   let storedMovieWatched = watched.find((o) => o.id === movie.id);
 
@@ -22,7 +38,7 @@ export const ResultCard = ({ movie }) => {
   const watchedDisabled = storedMovieWatched ? true : false;
 
   return (
-    <div className="result-card">
+    <div className="result-card" >
       <div className="poster-wrapper">
         {movie.poster_path ? (
           <img
@@ -46,7 +62,7 @@ export const ResultCard = ({ movie }) => {
           <button
             className="btn"
             disabled={watchlistDisabled}
-            onClick={() => addMovieToWatchlist(movie)}
+            oonClick={handleSubmit}
           >
             Add to Watchlist
           </button>

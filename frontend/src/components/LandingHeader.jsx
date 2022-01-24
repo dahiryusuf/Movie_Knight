@@ -10,17 +10,19 @@ export const LandingHeader = () => {
           <div className="brand">
             MovieKnight
           </div>
-
-          <li>
+<ul className="nav-links">
+<li>
           <Link to="/signup">Sign Up</Link>
-            </li>
+          </li>
 
-            <li>
+<li>
+
+            
             <Link to="/signin">Sign In</Link>
      
-             
-            </li>
-          
+            </li>        
+         
+            </ul>
         </div>
       </div>
     </header>

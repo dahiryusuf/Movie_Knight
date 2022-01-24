@@ -11,7 +11,7 @@ export default function WatchPartiesItem() {
     <h1 style={{textAlign: 'center' }}>  Dahirs Watch Parties </h1>
 
 
-    <Card className="text-center"     padding={20}>
+    <Card     padding={20}>
   <Card.Header as="h5">Name of Watch Part</Card.Header>
   <Figure style= {{float: 'right'}}>
   <Figure.Image
@@ -59,7 +59,7 @@ Movie Title
     <Button variant="secondary">Get Link</Button>
   </Card.Body>
 </Card>
-<Card className="text-center">
+<Card >
   <Card.Header as="h5">Name of Watch Part</Card.Header>
   <Figure style= {{float: 'right'}}>
   <Figure.Image

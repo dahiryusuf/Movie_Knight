@@ -85,8 +85,8 @@ const addToMoviePicks = (movie_id, watch_party_id) => {
       return db.query(query)
           .then(result => result.rows)
           .catch(err => err);
-
   }
+
   const getUsersWatchLists = () => {
     const query = {
         text: `SELECT users.id as user_id, first_name, last_name, email, watch_lists.id as watch_list_id, movie_id
@@ -115,6 +115,17 @@ const getUserWatchListId = (id) => {
     const query = {
         text: (`Select id From watch_parties Where link = '${id}';`)
     }
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+
+}
+
+const removeFromWatchList = (movie_id) => {
+    const query = {
+        text: (`DELETE FROM watch_lists WHERE id = ${movie_id};`)
+    }
+    
 
     return db.query(query)
         .then(result => result.rows)
@@ -155,6 +166,8 @@ const getMoviePicks = (id) => {
       getMoviePicks,
       getUserWatchListId,
       addToMovielist,
-      addToMoviePicks
+      addToMoviePicks,
+      getUserWatchList,
+      removeFromWatchList
   }
 }

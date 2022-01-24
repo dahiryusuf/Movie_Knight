@@ -3,7 +3,8 @@ const router = express.Router();
 const {
     getPostsByUsers,
     getWatchListByUsers,
-    getWatchListByUser
+    getWatchListByUser,
+    
     
 } = require('../helpers/dataHelpers');
 
@@ -19,7 +20,8 @@ module.exports = ({
     getMoviePicks,
     getUserWatchListId,
     addToMovielist,
-    addToMoviePicks
+    addToMoviePicks,
+    removeFromWatchList
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -96,6 +98,16 @@ module.exports = ({
                 error: err.message
             }));
     });
+    router.post('/watchlist/delete/', (req, res) => {
+        const  {movie_id
+        } = req.body;
+     
+        removeFromWatchList(movie_id)
+            .then(nMovie => res.json(nMovie))
+            .catch(err => res.json({
+                error: err.message
+            }));
+    })
 
     router.post('/movielist/:id', (req, res) => {
 
@@ -112,7 +124,7 @@ module.exports = ({
     })
     router.post('/moviepicks/:id', (req, res) => {
 
-        const  {movie_id
+        const  {movie_id, poster_path
         } = req.body;
 
         const watch_party_id = req.params.id;
@@ -130,6 +142,7 @@ module.exports = ({
         } = req.body;
 
         const user_id = req.params.id;
+        console.log(req.body)
 
         addToUserWatchlist(movie_id,poster_path, user_id)
             .then(newMovie => res.json(newMovie))
@@ -137,6 +150,7 @@ module.exports = ({
                 error: err.message
             }));
     })
+    
 
 
     return router;
