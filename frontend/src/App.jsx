@@ -10,8 +10,12 @@ import Landing from './components/Landing';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import WatchList from './components/WatchList';
+import PickMovie from './components/PickMovie';
+import MoviePicker from './components/MoviePicker';
 import WatchPartiesItem from './components/WatchPartiesItem';
 import { Search } from './components/Search';
+import { GlobalProvider } from './context/GlobalState';
+import { useCookies } from 'react-cookie';
 // import useGenre from './hooks/useGenre';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,6 +26,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [action, setAction] = useState([]);
   const [adventure, setAdventure] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
   const [animation, setAnimation] = useState([]);
   const [comedy, setComedy] = useState([]);
   const [crime, setCrime] = useState([]);
@@ -33,16 +38,22 @@ function App() {
   const [mystery, setMystery] = useState([]);
   const [romance, setRomance] = useState([]);
   const [thriller, setThriller] = useState([]);
+  const [cookies, setCookie] = useCookies(['user']);
+  const ids = cookies.Name
 
-
+  let array = [];
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/users/watchlists").then((res,req) => {
-    axios.get(`https://api.themoviedb.org/3/movie/${res.data[1].moviesInWatchList[1].movieId}?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US`).then((res,req) => {
+    axios.get(`http://localhost:3001/api/users/watchlist/${ids}`).then((res,req) => {
+    for(let i of res.data) { 
+      // console.log(i.movie_id);
+    axios.get(`https://api.themoviedb.org/3/movie/${i.movie_id}?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US`).then((res,req) => {
     //  console.log(res.data) 
-    setMovies(res.data)
+    array.push(res.data)
   })
-})
+}
+setWatchlist(array)
+}) 
   }, [])
 
   
@@ -65,6 +76,7 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalProvider>
           <Routes>
             <Route path = "/newparty" element = {<div><Header/> <NewWatchParty></NewWatchParty></div>} >
             </Route>
@@ -91,11 +103,19 @@ function App() {
              <Route path = "/watchlist" element = { 
              <WatchList movie = {movie}></WatchList> }
              ></Route>
+              <Route path = "/pickmovie" element = { <>
+            <PickMovie ></PickMovie>
+            <GenreTabs movie = {movie} action ={action} adventure ={adventure} watchlist = {watchlist} page = {true} ></GenreTabs>
+            </> }
+             ></Route>
+                  <Route path = "/moviepicker" element = { 
+            <MoviePicker movie = {movie} action ={action}></MoviePicker> }
+            ></Route>
               <Route path = "/watchparties" element = { 
              <WatchPartiesItem ></WatchPartiesItem> }
              ></Route>
           </Routes>
-
+          </GlobalProvider>
       </div>
   );
 // import MovieList from './components/MovieList';

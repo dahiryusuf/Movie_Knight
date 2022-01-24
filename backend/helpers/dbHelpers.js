@@ -32,10 +32,20 @@ module.exports = (db) => {
       return db.query(query)
           .then(result => result.rows[0])
           .catch(err => err);
+  }
+  const addWatchParty = (link, message, date, userId) => {
+    const query = {
+        text: `INSERT INTO watch_parties(link, messages, party_date, user_id) VALUES ($1, $2, $3, $4) RETURNING *` ,
+        values: [link, message, date, userId]
   }       
 
+<<<<<<< HEAD
 
   const addToUserWatchlist = ( movie_id,poster_path, user_id) => {
+=======
+  }
+  const addToUserWatchlist = ( movie_id, user_id) => {
+>>>>>>> b97d530cb8516102e2ca368855443955ace5939b
     const query = {
         text: `INSERT INTO watch_lists (movie_id,poster_path, user_id) VALUES ($1, $2,$ 3) RETURNING *` ,
         values: [movie_id,poster_path, user_id]
@@ -44,7 +54,8 @@ module.exports = (db) => {
     return db.query(query)
         .then(result => result.rows[0])
         .catch(err => err);
-} 
+}
+
 
   const getUsersPosts = () => {
       const query = {
@@ -90,8 +101,8 @@ const getUserWatchList = (id) => {
       addUser,
       getUsersPosts,
       getUsersWatchLists,
+      addWatchParty,
       addToUserWatchlist,
       getUserWatchList
-
-  };
-};
+  }
+}

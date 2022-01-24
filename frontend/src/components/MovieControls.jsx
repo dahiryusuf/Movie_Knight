@@ -1,5 +1,7 @@
 import axios from "axios";
 import React from "react";
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
 // const addMovieToWatched = function(movie_id, user_id) {
 //   axios.post(`http://localhost:3001/api/users/watchlist/${user_id}`, {
@@ -14,13 +16,23 @@ import React from "react";
 
 
 
-export const MovieControls= (props) => {
-  
+
+export const MovieControls = (props) => {
+  const {
+    removeFromWatched,
+    addMovieToWatched,
+    watched
+  } = useContext(GlobalContext);
+
+  const handleRemove = (event) => {
+    event.preventDefault();
+    removeFromWatched(props.movie)
+  }
 
 return (
     <div className="inner-card-controls">
-        <button className="btn btn-main2"  >
-           Add to WatchList
+        <button className="btn btn-main2" onClick={handleRemove}>
+           Remove Movie
           </button>
     </div>
   )};

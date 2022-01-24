@@ -7,6 +7,8 @@ const dbHelpers = require('./helpers/dbHelpers')(db)
 const cors = require('cors');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const watchPartiesRouter = require('./routes/watchParties');
+
 
 
 const app = express();
@@ -20,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/users', usersRouter(dbHelpers));
-
+app.use('/api',watchPartiesRouter(dbHelpers));
 
 
 app.get("/api/candidates", (req,res) => {
