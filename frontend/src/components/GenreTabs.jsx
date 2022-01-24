@@ -14,7 +14,7 @@ export default function GenreTabs(props) {
     loading: true,
     error: null
   })
-
+  const [watchlist, setWatchlist] = useState([]);
 // const results = useGenre("https://api.themoviedb.org/3/trending/movie/day?api_key=79ea73dd8ffddae85c10ba47e73e9093")
 
 // const useGenre = (url) => {
@@ -41,7 +41,25 @@ export default function GenreTabs(props) {
 
 // const hufan = result.data
 // console.log('hufan', hufan)
-// console.log('pop', props.action)
+let parsedWatchlist
+let indexs =0;
+useEffect(() => {
+  setWatchlist(1)
+ 
+}, [indexs])
+console.log('movie', props.watchlist)
+
+if(props.page){
+  indexs++
+parsedWatchlist = props.watchlist.map(movie => <MovieCard key={movie.id}
+  poster={movie.poster_path} 
+   title={movie.title} 
+   vote_average = {movie.vote_average}
+   release_date = {movie.release_date}
+   overview = {movie.overview}
+   id = {movie.id}
+   page = {props.page} 
+   />);}
   const parsedMovies = props.movie.map(movie => <MovieCard key={movie.id}
    poster={movie.poster_path} 
     title={movie.title} 
@@ -49,7 +67,7 @@ export default function GenreTabs(props) {
     release_date = {movie.release_date}
     overview = {movie.overview}
     id = {movie.id}
-    page = {false} 
+    page = {props.page} 
     />);
     const parsedAction = props.action.map(movie => <MovieCard key={movie.id}
       poster={movie.poster_path} 
@@ -57,6 +75,8 @@ export default function GenreTabs(props) {
        vote_average = {movie.vote_average}
        release_date = {movie.release_date}
        overview = {movie.overview}
+       page = {props.page} 
+       id = {movie.id}
        />);
        const parsedAdventure = props.adventure.map(movie => <MovieCard key={movie.id}
         poster={movie.poster_path} 
@@ -65,12 +85,18 @@ export default function GenreTabs(props) {
          release_date = {movie.release_date}
          overview = {movie.overview}
          id = {movie.id}
+         page = {props.page} 
          />);
+
+         const tabArray = ["Trending", "Action","Adventure"]
+         const tabArrayList = tabArray.map(item => <Tab>{item}</Tab>)
+ 
 
   return (
     
     <Tabs>
     <TabList>
+     {props.page ? <Tab>Watchlist</Tab> : <></>} 
       <Tab>Trending</Tab>
       <Tab>Action</Tab>
       <Tab>Adventure</Tab>
@@ -91,7 +117,19 @@ export default function GenreTabs(props) {
 
     </TabList>
 
-    <TabPanel  >
+    {props.page ? <TabPanel  >
+      <div className="movie-page">
+<div className="container">
+  <div className="header">
+  </div>
+    <div className="movie-grid">
+    {parsedWatchlist}
+    </div>
+
+</div>
+</div>
+</TabPanel> : <></>}
+<TabPanel  >
       <div className="movie-page">
 <div className="container">
   <div className="header">
@@ -102,7 +140,6 @@ export default function GenreTabs(props) {
 
 </div>
 </div>
-       
    
     </TabPanel>
     <TabPanel >

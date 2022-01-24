@@ -1,151 +1,95 @@
 import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useContext,useState,useEffect } from "react";
+import GenreTabs from "./GenreTabs";
 import "react-tabs/style/react-tabs.css";
 import { MovieCard } from "./MovieCard";
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import { Modal} from 'react-bootstrap';
+import { GlobalContext } from "../context/GlobalState";
+import axios from "axios";
 import '../NewWatchParty.css'
 
 export default function PickMovie(props) {
-  console.log('movieList', props)
-  const parsedMovies = props.movie.map(movie => <MovieCard key={movie.id}
-   poster={movie.poster_path} 
-    title={movie.title} 
-    page = {true} 
-    />);
-    const parsedAction = props.action.map(movie => <MovieCard key={movie.id}
-      poster={movie.poster_path} 
-       title={movie.title}
-       page = {true} 
-       />);
-       
-       const now = 60;
+  const [show, setShow]=useState(false);
+  const [movies, setMovies] = useState([]);
 
-       
+  const handleShow=()=>setShow(true);
+  const handleClose=()=>setShow(false);
+  const {
+    watched,
+    clearWatched,
+    removeFromWatched
+  } = useContext(GlobalContext);
+
+    let array = []
+    let now = 0
+    let index = 10 - watched.length
+    let check = true
+    if(watched.length >= 10){
+      check = false
+      now = 100
+    }
+    else{
+      now = watched.length * 10;
+    }
+    
+    useEffect(() => {
+      for(let i of watched) {
+      axios.get(`https://api.themoviedb.org/3/movie/${i}?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US`).then((res,req) => {
+     
+      array.push(res.data)
+    })
+      }
+      setMovies(array)
+    }, [watched])
+  
+    const parsedMovies = movies.map((movie,index) => <MovieCard key={index}
+      poster={movie.poster_path} 
+       title={movie.title} 
+       vote_average = {movie.vote_average}
+       release_date = {movie.release_date}
+       overview = {movie.overview}
+       id = {movie.id}
+       page = {props.page}
+       pick = {true}
+       whole = {movie} 
+       />);
+      
   return (
-    <div>
+<>
       <div className = 'card'>
 <Card >
   <Card.Header as="h5">MovieKnight</Card.Header>
   <Card.Body>
     <Card.Title>Pick Your Movies</Card.Title>
     <Card.Text>
-      You have 4 movies to go
+      You have {index} movies to go
     </Card.Text>
     <ProgressBar  animated now={now} label={`${now}%`} />
     <br/>
-    <Button variant="primary" size="lg" disabled>
+    <Button variant="primary" href="/newparty" size="lg" disabled = {check}>
     Done
   </Button>{' '}
+  <Button variant="primary" onClick={handleShow} size="lg" >
+    Picked Movies
+  </Button>{' '}
+  <Modal show={show} onHide={handleClose}>
+                      <Modal.Header closeButton >
+                        <Modal.Title></Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                      {parsedMovies}
+                      </Modal.Body>
+                      <Modal.Footer>
+                          <Button variant="primary" onClick={handleClose} >Close</Button>
+                      </Modal.Footer>
+                  </Modal>
   </Card.Body>
 
 </Card>
 </div>
-    <Tabs>
-    <TabList>
-      <Tab>WatchList</Tab>
-      <Tab>Trending</Tab>
-      <Tab>Action</Tab>
-      <Tab>Adventure</Tab>
-      <Tab>Animation</Tab>
-      <Tab>Comedy</Tab>
-      {/* <Tab>Crime</Tab>
-      <Tab>WatchList</Tab>
-      <Tab>Drama</Tab>
-      <Tab>Family</Tab>
-      <Tab>Fantasy</Tab>
-      <Tab>History</Tab>
-      <Tab>Horror</Tab>
-      <Tab>Mystery</Tab>
-      <Tab>Romance</Tab>
-      <Tab>Thriller</Tab> */}
-     
-
-
-    </TabList>
-
-    <TabPanel>
-      <div className="movie-page">
-<div className="container">
-  <div className="header">
-  </div>
-    <div className="movie-grid">
-    {parsedMovies}
-    </div>
-
-</div>
-</div>
-</TabPanel>
-<TabPanel>
-      <div className="movie-page">
-<div className="container">
-  <div className="header">
-  </div>
-    <div className="movie-grid">
-    {parsedMovies}
-    </div>
-
-</div>
-</div>
-      
-   
-    </TabPanel>
-    <TabPanel>
-    <div className="movie-page">
-<div className="container">
-  <div className="header">
-  </div>
-    <div className="movie-grid">
-    {parsedAction}
-    </div>
-
-</div>
-</div>
-       
-      
-    </TabPanel>
-    <TabPanel>
-      <p>
-        <b>Princess Peach</b> (<i>Japanese: ピーチ姫 Hepburn: Pīchi-hime, [piː.tɕi̥ çi̥.me]</i>)
-        is a character in Nintendo's Mario franchise. Originally created by Shigeru Miyamoto,
-        Peach is the princess of the fictional Mushroom Kingdom, which is constantly under
-        attack by Bowser. She often plays the damsel in distress role within the series and
-        is the lead female. She is often portrayed as Mario's love interest and has appeared
-        in Super Princess Peach, where she is the main playable character.
-      </p>
-     
-    </TabPanel>
-    <TabPanel>
-      <p>
-        <b>Yoshi</b> (<i>ヨッシー Yosshī, [joɕ.ɕiː]</i>) (<i>English: /ˈjoʊʃi/ or /ˈjɒʃi/</i>), once
-        romanized as Yossy, is a fictional anthropomorphic dinosaur who appears in
-        video games published by Nintendo. Yoshi debuted in Super Mario World (1990) on the
-        Super Nintendo Entertainment System as Mario and Luigi's sidekick. Yoshi later starred
-        in platform and puzzle games, including Super Mario World 2: Yoshi's Island, Yoshi's Story
-        and Yoshi's Woolly World. Yoshi also appears in many of the Mario spin-off games, including
-        Mario Party and Mario Kart, various Mario sports games, and Nintendo's crossover fighting
-        game series Super Smash Bros. Yoshi belongs to the species of the same name, which is
-        characterized by their variety of colors.
-      </p>
-      <p>
-       
-      </p>
-    </TabPanel>
-    <TabPanel>
-      <p>
-        <b>Toad</b> (<i>Japanese: キノピオ Hepburn: Kinopio</i>) is a fictional character who primarily
-        appears in Nintendo's Mario franchise. Created by Japanese video game designer Shigeru Miyamoto,
-        he is portrayed as a citizen of the Mushroom Kingdom and is one of Princess Peach's most loyal
-        attendants; constantly working on her behalf. He is usually seen as a non-player character (NPC)
-        who provides assistance to Mario and his friends in most games, but there are times when Toad(s)
-        takes center stage and appears as a protagonist, as seen in Super Mario Bros. 2, Wario's Woods,
-        Super Mario 3D World, and Captain Toad: Treasure Tracker.
-      </p>
-    
-   
-    </TabPanel>
-  </Tabs>
-  </div>
+  </>
 );
 }

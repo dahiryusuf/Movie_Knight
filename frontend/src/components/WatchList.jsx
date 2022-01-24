@@ -2,18 +2,21 @@ import {React, useEffect, useState} from "react";
 import { MovieCard } from "./MovieCard";
 import { Header } from "./Header";
 import axios from "axios";
-
+import { useCookies } from 'react-cookie';
 
 export default function WatchList(props) {
   const [watchlist, setWatchlist] = useState([]);
+  const [cookies, setCookie] = useCookies(['user']);
+  const id = cookies.Name
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/users/watchlist/1").then((res,req) => {
+    axios.get(`http://localhost:3001/api/users/watchlist/${id}`).then((res,req) => {
     setWatchlist(res.data)
   })
   }, [])
   console.log('watch',watchlist)
   console.log('props',props.movie)
+
 
   const parsedMovies = watchlist.map(movie => <MovieCard key={movie.id}
    poster={movie.poster_path} 

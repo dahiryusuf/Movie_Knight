@@ -4,45 +4,39 @@ import axios from 'axios'
 import TinderCard from 'react-tinder-card'
 import '../MoviePicker.css'
 
-const db = [
-  {
-    name: 'Richard Hendricks',
-    url: 'https://sm.ign.com/t/ign_in/gallery/s/spider-man/spider-man-far-from-home-official-movie-posters_epch.1080.jpg'
-  },
-  {
-    name: 'Erlich Bachman',
-    url: 'https://images.complex.com/complex/images/c_fill,dpr_auto,f_auto,q_auto,w_1400/fl_lossy,pg_1/gdv2pu6io6ekpg5r8mta/back-to-the-future?fimg-ssr-default'
-  },
-  {
-    name: 'Monica Hall',
-    url: 'https://www.indiewire.com/wp-content/uploads/2019/12/us-1.jpg?w=758'
-  },
-  {
-    name: 'Jared Dunn',
-    url: 'https://www.digitalartsonline.co.uk/cmsdata/slideshow/3662115/baby-driver-rory-hi-res.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    url: 'https://www.indiewire.com/wp-content/uploads/2019/12/midsommar.jpg?w=800'
-  }
-]
 export default function MoviePicker() {
   const [ip, setIP] = useState('');
-
+  const [movies, setMovies] = useState([]);
+  const movi = [];
+  
   //creating function to load ip address from the API
   const getData = () => {
     axios.get('https://geolocation-db.com/json/').then((res,req) => {
-    console.log(res.data);
+    // console.log(res.data);
     setIP(res.data.IPv4)
   })
   }
-  
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/users/movielist/1").then((res,req) => {
+    for(let i of res.data) {
+    axios.get(`https://api.themoviedb.org/3/movie/${i.movie_id}?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US`).then((res,req) => {
+    //  console.log(res.data) 
+    movi.push(res.data)
+  })
+}
+setMovies(movi)
+})
+  }, [])
   useEffect( () => {
     //passing getData method to the lifecycle method
     getData()
+  
 
   }, [])
-  const characters = db
+  console.log(movies);
+  const url = 'https://image.tmdb.org/t/p/w200'
+  const characters = movies
   const [lastDirection, setLastDirection] = useState()
 
   const swiped = (direction, nameToDelete) => {
@@ -60,20 +54,20 @@ export default function MoviePicker() {
       <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
       <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
       <h1>Movie Picker</h1>
-      <h2>Your IP Address is below so if you try to do this agian I will know</h2>
-      <h4>{ip}</h4>
       <h2>Swipe right if you want to watch the movie</h2>
       <h2>Swipe left if you don't</h2>
       <br/>
-      <div className='cardContainer'>
+      <div className='cardContainers'>
         {characters.map((character) =>
-          <TinderCard className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
-            <div style={{ backgroundImage: 'url(' + character.url + ')' }} className='card'>
-           
+          <TinderCard className='swipe' key={character.id} onSwipe={(dir) => swiped(dir, character.original_title)} onCardLeftScreen={() => outOfFrame(character.original_title)}>
+            <div style={{backgroundImage: `url('https://image.tmdb.org/t/p/w200${character.poster_path}')`}} className='cards'>
+            <h3>{character.original_title}</h3>
             </div>
           </TinderCard>
+          
         )}
       </div>
+    
       {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
     </div>
     </div>

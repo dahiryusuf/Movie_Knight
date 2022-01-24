@@ -1,24 +1,43 @@
 import React from 'react'
 import Calendar from 'react-calendar'
-import { useState } from 'react';
+import { useState,useContext,useEffect } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import '../NewWatchParty.css'
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { GlobalContext } from "../context/GlobalState";
 
 export default function NewWatchParty() {
   const [value, onChange] = useState(new Date());
   const [message, setMessage] = useState("");
+  const [movies, setMovies] = useState([]);
   const [cookies, setCookie] = useCookies(['user']);
-
+  const {
+    watched,
+    clearWatched
+  } = useContext(GlobalContext);
+  let array =[]
+  useEffect(() => {
+    for(let i of watched) {
+    axios.get(`https://api.themoviedb.org/3/movie/${i}?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US`).then((res,req) => {
+   
+    array.push(res.data)
+  })
+    }
+    setMovies(array)
+  }, [watched])
+ useEffect(() => {
+  
+ }, [])
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(message, value)
     
-    // eslint-disable-next-line no-console
+  
+  
     const link = "testing"
-    const userId = 3
+    
     axios.post('http://localhost:3001/api/newparty', {
       link,
       userId: cookies.Name,
@@ -36,6 +55,7 @@ export default function NewWatchParty() {
   return (
     <div className = "body">
         <h1> Create A New Watch Party</h1>
+       
          <Calendar onChange={onChange} />
          <br/>
          <div>
@@ -49,6 +69,7 @@ export default function NewWatchParty() {
           data-testid="student-name-input"
         />
       </form>
+      
       <button className="btn btn-primary" onClick = {handleSubmit}>Pick Movies</button>
       <br/>
       <br/>
