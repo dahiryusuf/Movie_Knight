@@ -14,7 +14,12 @@ module.exports = ({
     getUsersPosts,
     getUsersWatchLists,
     addToUserWatchlist,
-    getUserWatchList
+    getUserWatchList,
+    getUserMovieList,
+    getMoviePicks,
+    getUserWatchListId,
+    addToMovielist,
+    addToMoviePicks
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -47,6 +52,17 @@ module.exports = ({
                 error: err.message
             }));
     });
+    router.get('/movielist/:id', (req, res) => {
+        console.log(req.params)
+        const id = req.params.id
+        getUserMovieList(id)
+            .then((movielist) => { 
+                res.json(movielist);
+            })
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
 
     router.get('/watchlists', (req, res) => {
         getUsersWatchLists()
@@ -58,17 +74,64 @@ module.exports = ({
                 error: err.message
             }));
     });
+    router.get('/moviepicker/:id', (req, res) => {
+        console.log(req.params)
+        const id = req.params.id
+        getUserWatchListId(id)
+            .then((moviepicks) => { 
+                res.json(moviepicks);
+            })
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+    router.get('/moviepicks/:id', (req, res) => {
+        console.log(req.params)
+        const id = req.params.id
+        getMoviePicks(id)
+            .then((moviepicks) => { 
+                res.json(moviepicks);
+            })
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
 
-  
-
-    router.post('/watchlist/:id', (req, res) => {
+    router.post('/movielist/:id', (req, res) => {
 
         const  {movie_id
         } = req.body;
 
+        const watch_party_id = req.params.id;
+
+        addToMovielist(movie_id, watch_party_id)
+            .then(neMovie => res.json(neMovie))
+            .catch(err => res.json({
+                error: err.message
+            }));
+    })
+    router.post('/moviepicks/:id', (req, res) => {
+
+        const  {movie_id
+        } = req.body;
+
+        const watch_party_id = req.params.id;
+
+        addToMoviePicks(movie_id, watch_party_id)
+            .then(nMovie => res.json(nMovie))
+            .catch(err => res.json({
+                error: err.message
+            }));
+    })
+    router.post('/watchlist/:id', (req, res) => {
+
+        const  {movie_id,
+            poster_path
+        } = req.body;
+
         const user_id = req.params.id;
 
-        addToUserWatchlist(movie_id, user_id)
+        addToUserWatchlist(movie_id,poster_path, user_id)
             .then(newMovie => res.json(newMovie))
             .catch(err => res.json({
                 error: err.message
