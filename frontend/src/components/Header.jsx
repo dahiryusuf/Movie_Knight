@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Profile from "./Profile";
 
 
 export const Header = () => {
@@ -23,11 +24,16 @@ export const Header = () => {
             <li className="btn btn-main">
            
             <Link to="/newparty">New Party</Link>
+     
+
+
              
             </li>
           </ul>
+          
         </div>
       </div>
+ 
     </header>
   );
 };
