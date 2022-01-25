@@ -141,6 +141,17 @@ const removeFromWatchList = (movie_id) => {
         .catch(err => err);
 
 }
+const removeFromWatchParties = (id) => {
+    const query = {
+        text: (`DELETE FROM watch_parties WHERE id = ${id};`)
+    }
+    
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
+
+}
 const getUserMovieList = (id) => {
     const query = {
         text: (`SELECT * FROM movie_lists WHERE watch_party_id = ${id};`)
@@ -161,6 +172,16 @@ const getMoviePicks = (id) => {
         .catch(err => err);
 
 }
+const updateWatchParty = (poster_path, id) => {
+    const query = {
+        text: (`UPDATE watch_parties
+        SET winner =${poster_path}
+        WHERE id = ${id};`)
+  }       
+        return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+  }
 
   return {
       getUsers,
@@ -178,6 +199,8 @@ const getMoviePicks = (id) => {
       addToMoviePicks,
       getUserWatchList,
       removeFromWatchList,
-      getUserWatchParties
+      getUserWatchParties,
+      removeFromWatchParties,
+      updateWatchParty
   }
 }

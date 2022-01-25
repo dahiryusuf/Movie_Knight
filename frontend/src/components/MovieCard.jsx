@@ -59,11 +59,13 @@ const handleRemove = (event) => {
     .catch(function (error) {
       console.log(error);
     });
+    handleClose()
   }
   
   else{
      addMovieToWatched(props.id)
   }
+
 }
 
    
@@ -101,7 +103,6 @@ const handleRemove = (event) => {
                       <p>{props.overview}</p>
                       </Modal.Body>
                       <Modal.Footer>
-                          <Button variant="secondary" onClick={handleClose} >Close</Button>
                           <Button variant="primary"onClick={handleSubmit} disabled = {index}>Add</Button>
                       </Modal.Footer>
                   </Modal>

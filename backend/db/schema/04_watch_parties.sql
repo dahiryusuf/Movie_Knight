@@ -5,5 +5,6 @@ CREATE TABLE watch_parties(
     link VARCHAR(255) NOT NULL,
     messages TEXT,
     party_date VARCHAR(255) NOT NULL, 
+    winner VARCHAR(255) NOT NULL,
     user_id INTEGER REFERENCES users(id)
 );

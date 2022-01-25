@@ -22,7 +22,9 @@ module.exports = ({
     addToMovielist,
     addToMoviePicks,
     removeFromWatchList,
-    getUserWatchParties
+    getUserWatchParties,
+    removeFromWatchParties,
+    updateWatchParty
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -78,6 +80,18 @@ module.exports = ({
                 error: err.message
             }));
     });
+    router.post('/watchparties/:id', (req, res) => {
+        const id = req.params.id
+        const poster_path = req.body.poster_path
+        console.log(req.body)
+        updateWatchParty(poster_path, id)
+            .then((watchparties) => { 
+                res.json(watchparties);
+            })
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
 
     router.get('/watchlists', (req, res) => {
         getUsersWatchLists()
@@ -116,6 +130,18 @@ module.exports = ({
         } = req.body;
      
         removeFromWatchList(movie_id)
+            .then(nMovie => res.json(nMovie))
+            .catch(err => res.json({
+                error: err.message
+            }));
+    })
+
+    router.post('/watchpartiess/delete/', (req, res) => {
+        const  {movie_id}
+        = req.body
+        console.log("req.body.movie_id")
+     
+        removeFromWatchParties(movie_id)
             .then(nMovie => res.json(nMovie))
             .catch(err => res.json({
                 error: err.message
