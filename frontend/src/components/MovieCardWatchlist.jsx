@@ -13,8 +13,6 @@ export const MovieCard = (props) => {
 
 
 
-  
-  console.log('watchLIST'.props)
 
    const handleRemove = (event) => {
     event.preventDefault();

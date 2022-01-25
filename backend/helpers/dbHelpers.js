@@ -87,6 +87,15 @@ const getUserWatchList = (id) => {
     return db.query(query)
         .then(result => result.rows)
         .catch(err => err);
+}
+const getUserWatchParties = (id) => {
+    const query = {
+        text: (`SELECT * FROM watch_parties WHERE user_id = ${id};`)
+    }
+
+    return db.query(query)
+        .then(result => result.rows)
+        .catch(err => err);
 
 }
 const removeFromWatchList = (movie_id) => {
@@ -109,6 +118,7 @@ const removeFromWatchList = (movie_id) => {
       addWatchParty,
       addToUserWatchlist,
       getUserWatchList,
-      removeFromWatchList
+      removeFromWatchList,
+      getUserWatchParties
   }
 }
