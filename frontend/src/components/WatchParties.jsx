@@ -3,6 +3,8 @@ import WatchPartiesItem from "./WatchPartiesItem";
 import { Header } from "./Header";
 import axios from "axios";
 import { useCookies } from 'react-cookie';
+import Grid from '@mui/material/Grid';
+
 
 export default function WatchParties() {
 
@@ -36,7 +38,11 @@ const [watchparties, setWatchParties] = useState([]);
 
 
   return <div>
-
+<Header/>
+<h1> Dahir's Watch Parties </h1>
+<div className="movie-grid">
+ 
 {parsedMovies}
+</div>
   </div>;
 }
