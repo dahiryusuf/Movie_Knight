@@ -21,11 +21,13 @@ export const MovieControls = (props) => {
   const {
     removeFromWatched,
     addMovieToWatched,
+    clearWatched,
     watched
   } = useContext(GlobalContext);
 
   const handleRemove = (event) => {
     event.preventDefault();
+
     removeFromWatched(props.movie)
   }
 

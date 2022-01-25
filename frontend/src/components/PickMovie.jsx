@@ -4,9 +4,11 @@ import GenreTabs from "./GenreTabs";
 import "react-tabs/style/react-tabs.css";
 import { MovieCard } from "./MovieCard";
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import { MovieControls } from "./MovieControls";
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import { Modal} from 'react-bootstrap';
+import Offcanvas from 'react-bootstrap/Offcanvas'
+import { Modal,ListGroup} from 'react-bootstrap';
 import { GlobalContext } from "../context/GlobalState";
 import axios from "axios";
 import '../NewWatchParty.css'
@@ -14,6 +16,7 @@ import '../NewWatchParty.css'
 export default function PickMovie(props) {
   const [show, setShow]=useState(false);
   const [movies, setMovies] = useState([]);
+  const [m, setM] = useState([]);
 
   const handleShow=()=>setShow(true);
   const handleClose=()=>setShow(false);
@@ -22,7 +25,7 @@ export default function PickMovie(props) {
     clearWatched,
     removeFromWatched
   } = useContext(GlobalContext);
-
+  
     let array = []
     let now = 0
     let index = 10 - watched.length
@@ -45,7 +48,11 @@ export default function PickMovie(props) {
       setMovies(array)
     }, [watched])
   
-    const parsedMovies = movies.map((movie,index) => <MovieCard key={index}
+    setTimeout(() => {
+      setM(1)
+     }, 200);
+
+    const parsedMovies = movies.map((movie,index) => <><MovieControls movie = {movie.id}/>  <MovieCard key={index}
       poster={movie.poster_path} 
        title={movie.title} 
        vote_average = {movie.vote_average}
@@ -55,11 +62,19 @@ export default function PickMovie(props) {
        page = {props.page}
        pick = {true}
        whole = {movie} 
-       />);
+       /></>);
       
   return (
 <>
-      <div className = 'card'>
+<Card style={{ width: '18rem' }}>
+  <Card.Header>Featured</Card.Header>
+  <ListGroup variant="flush">
+    <ListGroup.Item>Cras justo odio</ListGroup.Item>
+    <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+  </ListGroup>
+</Card>
+      <div className = 'carded'>
 <Card >
   <Card.Header as="h5">MovieKnight</Card.Header>
   <Card.Body>
@@ -75,17 +90,14 @@ export default function PickMovie(props) {
   <Button variant="primary" onClick={handleShow} size="lg" >
     Picked Movies
   </Button>{' '}
-  <Modal show={show} onHide={handleClose}>
-                      <Modal.Header closeButton >
-                        <Modal.Title></Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                      {parsedMovies}
-                      </Modal.Body>
-                      <Modal.Footer>
-                          <Button variant="primary" onClick={handleClose} >Close</Button>
-                      </Modal.Footer>
-                  </Modal>
+  <Offcanvas show={show} onHide={handleClose} {...props}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+        {parsedMovies}
+        </Offcanvas.Body>
+      </Offcanvas>
   </Card.Body>
 
 </Card>

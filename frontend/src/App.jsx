@@ -19,6 +19,7 @@ import { useCookies } from 'react-cookie';
 // import useGenre from './hooks/useGenre';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import LinkPage from './components/LinkPage';
 
 
 function App() {
@@ -97,6 +98,9 @@ setWatchlist(array)
              <Route path = "/signup" element = { 
              <Signup></Signup> }
              ></Route>
+                 <Route path = "/link/:id" element = { 
+             <LinkPage></LinkPage> }
+             ></Route>
              <Route path = "/signin" element = { 
              <Signin></Signin> }
              ></Route>
@@ -108,7 +112,7 @@ setWatchlist(array)
             <GenreTabs movie = {movie} action ={action} adventure ={adventure} watchlist = {watchlist} page = {true} ></GenreTabs>
             </> }
              ></Route>
-                  <Route path = "/moviepicker" element = { 
+                  <Route path = "/moviepicker/:id" element = { 
             <MoviePicker movie = {movie} action ={action}></MoviePicker> }
             ></Route>
               <Route path = "/watchparties" element = { 

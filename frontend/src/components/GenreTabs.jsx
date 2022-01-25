@@ -43,10 +43,9 @@ export default function GenreTabs(props) {
 // console.log('hufan', hufan)
 let parsedWatchlist
 let indexs =0;
-useEffect(() => {
-  setWatchlist(1)
- 
-}, [indexs])
+setTimeout(() => {
+ setWatchlist(1)
+}, 200);
 console.log('movie', props.watchlist)
 
 if(props.page){
