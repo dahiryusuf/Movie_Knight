@@ -15,7 +15,7 @@ export default function WatchList(props) {
   })
   }, [])
 
-  console.log('props',props.movie)
+ 
 
 
   const parsedMovies = watchlist.map(movie => <MovieCard key={movie.id}

@@ -12,7 +12,7 @@ import Signin from './components/Signin';
 import WatchList from './components/WatchList';
 import PickMovie from './components/PickMovie';
 import MoviePicker from './components/MoviePicker';
-import WatchPartiesItem from './components/WatchPartiesItem';
+import WatchParties from './components/WatchParties';
 import { Search } from './components/Search';
 import { GlobalProvider } from './context/GlobalState';
 import { useCookies } from 'react-cookie';
@@ -116,7 +116,7 @@ setWatchlist(array)
             <MoviePicker movie = {movie} action ={action}></MoviePicker> }
             ></Route>
               <Route path = "/watchparties" element = { 
-             <WatchPartiesItem ></WatchPartiesItem> }
+             <WatchParties ></WatchParties> }
              ></Route>
           </Routes>
           </GlobalProvider>

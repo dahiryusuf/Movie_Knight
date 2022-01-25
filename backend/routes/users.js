@@ -21,7 +21,8 @@ module.exports = ({
     getUserWatchListId,
     addToMovielist,
     addToMoviePicks,
-    removeFromWatchList
+    removeFromWatchList,
+    getUserWatchParties
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -60,6 +61,18 @@ module.exports = ({
         getUserMovieList(id)
             .then((movielist) => { 
                 res.json(movielist);
+            })
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+
+    router.get('/watchparties/:id', (req, res) => {
+        console.log(req.params.id)
+        const id = req.params.id
+        getUserWatchParties (id)
+            .then((watchparties) => { 
+                res.json(watchparties);
             })
             .catch((err) => res.json({
                 error: err.message
