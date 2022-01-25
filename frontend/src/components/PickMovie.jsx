@@ -52,7 +52,7 @@ export default function PickMovie(props) {
       setM(1)
      }, 200);
 
-    const parsedMovies = movies.map((movie,index) => <><MovieControls movie = {movie.id}/>  <MovieCard key={index}
+    const parsedMovies = movies.map((movie,index) => <> <MovieCard key={index}
       poster={movie.poster_path} 
        title={movie.title} 
        vote_average = {movie.vote_average}
@@ -61,21 +61,15 @@ export default function PickMovie(props) {
        id = {movie.id}
        page = {props.page}
        pick = {true}
+       pic = {true}
        whole = {movie} 
        /></>);
       
   return (
 <>
-<Card style={{ width: '18rem' }}>
-  <Card.Header>Featured</Card.Header>
-  <ListGroup variant="flush">
-    <ListGroup.Item>Cras justo odio</ListGroup.Item>
-    <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-  </ListGroup>
-</Card>
-      <div className = 'carded'>
-<Card >
+
+<div className = 'carded'>
+<Card>
   <Card.Header as="h5">MovieKnight</Card.Header>
   <Card.Body>
     <Card.Title>Pick Your Movies</Card.Title>
@@ -88,11 +82,11 @@ export default function PickMovie(props) {
     Done
   </Button>{' '}
   <Button variant="primary" onClick={handleShow} size="lg" >
-    Picked Movies
+   Remove a Movie
   </Button>{' '}
   <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Picked Movies</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
         {parsedMovies}

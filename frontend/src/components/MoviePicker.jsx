@@ -80,7 +80,7 @@ setMovies(movi)
         {characters.map((character) =>
           <TinderCard className='swipe' key={character.id} onSwipe={(dir) => swiped(dir, character.id)} onCardLeftScreen={() => outOfFrame(character.original_title)}>
             <div style={{backgroundImage: `url('https://image.tmdb.org/t/p/w200${character.poster_path}')`}} className='cards'>
-            <h3>{character.original_title}</h3>
+            <h3 className = 'h3'>{character.original_title}</h3>
             </div>
           </TinderCard>
           

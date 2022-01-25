@@ -63,13 +63,14 @@ const handleRemove = (event) => {
   
   else{
      addMovieToWatched(props.id)
+     handleClose()
   }
 }
 
    
   return (
     <>
-    <div className="movie-card" onClick={props.pick ? handleRemove : handleShow} >
+    <div className="movie-card" onClick={props.pick || props.pic ? handleRemove : handleShow} >
     <div className="overlay">
 
 <img

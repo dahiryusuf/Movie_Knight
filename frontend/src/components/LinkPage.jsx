@@ -45,12 +45,11 @@ import {
 } from "react-share";
 export default function LinkPage(props) {
   let { id } = useParams();
-  const shareUrl = `http://localhost:3002/moviepicker/${id}`;
+  const shareUrl = `http://localhost:3002/moviepicker/${props.link}`;
     const title = 'MovieKnight';
   return (
     <div>
      <Card className="text-center">
-  <Card.Header>MovieKnight</Card.Header>
   <Card.Body>
     <Card.Title>Share this link with your friends</Card.Title>
     <Card.Text>
@@ -89,7 +88,6 @@ export default function LinkPage(props) {
           </EmailShareButton>
          
   </Card.Body>
-  <Card.Footer className="text-muted">© MovieKnight</Card.Footer>
 </Card>
     </div>
   )

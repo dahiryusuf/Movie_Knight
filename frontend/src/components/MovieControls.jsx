@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useContext } from "react";
+import { useContext,useState } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 // const addMovieToWatched = function(movie_id, user_id) {
@@ -18,6 +18,8 @@ import { GlobalContext } from "../context/GlobalState";
 
 
 export const MovieControls = (props) => {
+
+
   const {
     removeFromWatched,
     addMovieToWatched,
@@ -27,8 +29,8 @@ export const MovieControls = (props) => {
 
   const handleRemove = (event) => {
     event.preventDefault();
-
     removeFromWatched(props.movie)
+    window.location.reload(true)
   }
 
 return (
