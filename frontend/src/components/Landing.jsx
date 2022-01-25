@@ -13,20 +13,7 @@ export default function Landing() {
   <section id="section-a">
     <p>Choosing movies seems to take up a lot of our movie watching time. Movie knight allows users to pre-select a list of movies for their guest to choose from. Guests swipe through the list of  pre-selected movies and choose the movies they are willing to watch. The website receives the information and provides the user with the top pick based on their guests choices. Voila! Movie picking has never been easier </p>
   </section>
-  <section id="section-b">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit minus impedit maxime, quae soluta quis cumque perferendis! Doloribus quaerat, placeat iste facere, aspernatur ex cum veritatis laudantium, officia, non porro exercitationem incidunt quis dolore? Officia ex accusamus expedita optio, voluptatem minus? In maiores omnis aperiam earum ab molestiae beatae laborum blanditiis incidunt, delectus dolor, id voluptates optio aspernatur aliquam saepe atque labore? Tempore reprehenderit ab ipsam perspiciatis ut, provident perferendis sapiente in numquam blanditiis, enim, illo error nulla incidunt quos quidem ratione repellat ipsa molestias veritatis? Mollitia, fugit dolore commodi porro repudiandae atque, eos, ipsum quam culpa fuga deleniti quae.</p>
-  </section>
-  <section id="section-c">
-    <div className="box-1">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dolorum est, molestias dolores quis sunt nobis temporibus veritatis libero odio!
-    </div>
-    <div className="box-2">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dolorum est, molestias dolores quis sunt nobis temporibus veritatis libero odio!
-    </div>
-    <div className="box-3">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dolorum est, molestias dolores quis sunt nobis temporibus veritatis libero odio!
-    </div>
-  </section>
+
     </div>
   )
 }

@@ -17,13 +17,13 @@ export const MovieCard = (props) => {
    const handleRemove = (event) => {
     event.preventDefault();
     const movie_id = props.id
-    const id = cookies.Name
     console.log(movie_id);
     axios.post(`http://localhost:3001/api/users/watchlist/delete`, {
       movie_id: movie_id
     })
     .then(function (response) {
       console.log(response);
+      window.location.reload(true)
     })
     .catch(function (error) {
       console.log(error);
