@@ -4,6 +4,11 @@ import {MovieControls} from "./MovieControls";
 import axios from "axios";
 import { useCookies } from 'react-cookie';
 import { GlobalContext } from "../context/GlobalState";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+
+const element = <FontAwesomeIcon size='3x' icon={faPlusCircle
+} />
 
 export const MovieCard = (props) => {
   const [show, setShow]=useState(false);
@@ -72,8 +77,8 @@ const handleRemove = (event) => {
    
   return (
     <>
-    <div className="movie-card" onClick={props.pick || props.pic ? handleRemove : handleShow} >
-    <div className="overlay">
+    <div className="movie-card"  >
+    <div className="overlay" onClick={props.pick || props.pic ? handleRemove : handleShow}>
 
 <img
   src={`https://image.tmdb.org/t/p/w200/${props.poster}`}
@@ -87,8 +92,14 @@ const handleRemove = (event) => {
         src={`https://image.tmdb.org/t/p/w200${props.poster}`}
         alt={`${props.title} Poster`}
       />
-      
+         <div className="inner-card-controls2">
+        <button className="btn btn-main2" onClick={handleSubmit} >
+       {element}
+          </button>
     </div>
+    </div>
+    
+    
 
       <Modal show={show} onHide={handleClose}>
                       <Modal.Header closeButton >

@@ -82,9 +82,9 @@ module.exports = ({
     });
     router.post('/watchparties/:id', (req, res) => {
         const id = req.params.id
-        const poster_path = req.body.poster_path
+        const {poster_path,movie_id} = req.body
         console.log(req.body)
-        updateWatchParty(poster_path, id)
+        updateWatchParty(poster_path,movie_id,id)
             .then((watchparties) => { 
                 res.json(watchparties);
             })

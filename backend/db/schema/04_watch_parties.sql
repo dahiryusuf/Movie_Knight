@@ -6,5 +6,6 @@ CREATE TABLE watch_parties(
     messages TEXT,
     party_date VARCHAR(255) NOT NULL, 
     winner VARCHAR(255) NOT NULL,
+    winner_movie_id INTEGER  ,
     user_id INTEGER REFERENCES users(id)
 );

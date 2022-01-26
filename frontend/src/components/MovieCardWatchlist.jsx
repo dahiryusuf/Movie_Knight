@@ -4,6 +4,7 @@ import axios from "axios";
 import { useCookies } from 'react-cookie';
 import { GlobalContext } from "../context/GlobalState";
 
+
 export const MovieCard = (props) => {
   const [show, setShow]=useState(false);
   const [cookies, setCookie] = useCookies(['user']);
