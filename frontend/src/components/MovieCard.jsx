@@ -86,19 +86,22 @@ const handleRemove = (event) => {
 />
 
 
-{props.pick ? <MovieControls movie = {props.id} /> : <></>}
+{props.pick && !props.lo ? <MovieControls movie = {props.id} /> : <></>}
 </div>
 <img
         src={`https://image.tmdb.org/t/p/w200${props.poster}`}
         alt={`${props.title} Poster`}
       />
+      {!props.pick && <>
          <div className="inner-card-controls2">
         <button className="btn btn-main2" onClick={handleSubmit} >
        {element}
           </button>
     </div>
+    </>
+}
     </div>
-    
+
     
 
       <Modal show={show} onHide={handleClose}>
@@ -106,8 +109,11 @@ const handleRemove = (event) => {
                         
                         <Modal.Title>         <h3>{props.title}</h3></Modal.Title>
                       </Modal.Header>
-                      <Modal.Body>
-                      <img className="card-img-top" style={{width:'14rem'}}   src={`https://image.tmdb.org/t/p/w200${props.poster}`}  alt={props.title}  />
+                      <Modal.Body sx={{ textAlign: 'center' }}>
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}> 
+                      <img  className="card-img-top" style={{width:'14rem'}}   src={`https://image.tmdb.org/t/p/w200${props.poster}`}  
+                      alt={props.title}  />
+                      </div>
                       <h4>IMDb: {props.vote_average}</h4>
                       <h5>Release Date: {props.release_date}</h5>
                       <br></br>

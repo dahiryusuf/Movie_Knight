@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import { MovieCard } from './MovieCard';
 import Calendar from 'react-calendar';
 import { padding } from '@mui/system';
-// import { DatePicker } from 'react-rainbow-components';
+import { DatePicker } from 'react-rainbow-components';
 import Spinner from 'react-bootstrap/Spinner'
 import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 import { withTheme } from '@emotion/react';
@@ -95,7 +95,7 @@ const containerStyle = {
   };
 
 
-const steps = ['Select Movies', 'Pick your date', 'Create your watch party'];
+const steps = ['Select Movies', 'Add the details', 'Create your watch party'];
 
   let array =[]
   useEffect(() => {
@@ -168,6 +168,8 @@ poster={movie.poster_path}
  overview = {movie.overview}
  id = {movie.id}
  whole = {movie}
+ pick = {true}
+ lo = {true}
  pic = {true} 
  /></>);
 
@@ -209,18 +211,18 @@ poster={movie.poster_path}
       ) : (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-          {activeStep === 0 && ( <><br/> {watched.length < 10 && (<h2> Pick the movies for your watch party</h2>)} {watched.length >= 10 && (<><h4>You picked:</h4> <div className="movie-grid">
+          {activeStep === 0 && ( <><br/> {watched.length < 5 && (<h2> Pick the movies for your watch party</h2>)} {watched.length >= 5 && (<><h4>Your Selections:</h4> <div className="movie-grid">
     {parsedMovies}
-    </div> </>)} <br/> <br/> {watched.length < 10 ? <Link  className="btn btn-primary" to= {`/pickmovie`} > Pick movies </Link>  : <Link  className="btn btn-primary" to= {`/pickmovie`} > Edit selected movies </Link> }<br/> </>)}
-    {activeStep === 1 && ( <><br/> <h2> Pick the date and add a message to your watch party</h2>   <br/> <div style = {{ display: 'flex', flexDirection: 'row'}}>    <div
+    </div> </>)} <br/> <br/> {watched.length <5  ? <Link  className="btn btn-primary" to= {`/pickmovie`} > Pick movies </Link>  : <Link  className="btn btn-primary" to= {`/pickmovie`} > Edit selected movies </Link> }<br/> </>)}
+    {activeStep === 1 && ( <><br/> <h2> &ensp;&emsp;Pick a date &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp; Add a message</h2>   <br/> <div style = {{ display: 'flex', flexDirection: 'row'}}>    <div
         className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
         style={containerStyles}> 
-      {/* <DatePicker */}
-    {/* //         value={value}
-    //         minDate={new Date(2021, 0, 4)}
-    //         label="Watch Party Date"
-    //         onChange={onChange}
-    //     />  */}
+       <DatePicker 
+            value={value}
+          minDate={new Date(2021, 0, 4)}
+         label="Watch Party Date"
+            onChange={onChange}
+        /> 
         </div>   
     <div style = {{ paddingLeft: '250px'}}>
     <div

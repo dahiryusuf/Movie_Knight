@@ -24,9 +24,10 @@ export default function WatchList(props) {
     id = {movie.id}
     />);
   return (
-
-<div className="movie-page">
+<>
 <Header /> 
+<div className="movie-page">
+
 <div className="container">
   <div className="header">
     <h1 className="heading">Dahir's Watchlist</h1>
@@ -39,5 +40,7 @@ export default function WatchList(props) {
     
 
 </div>
-</div>)
+</div>
+</>)
+
 }
