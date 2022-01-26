@@ -53,7 +53,7 @@ export default function LinkPage(props) {
   <Card.Body>
     <Card.Title>Share this link with your friends</Card.Title>
     <Card.Text>
-    <a href={shareUrl}>{shareUrl}</a>
+    <a href={shareUrl} target="_blank" rel="noopener noreferrer">{shareUrl}</a>
     </Card.Text>
     <FacebookShareButton
             url={shareUrl}

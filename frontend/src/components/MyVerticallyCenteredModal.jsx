@@ -17,13 +17,12 @@ export default function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-       <LinkPage link = {props.link}></LinkPage>
+       <LinkPage link = {props.link} ></LinkPage>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
-  );
     </div>
   )
 }

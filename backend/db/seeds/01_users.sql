@@ -1,8 +1,8 @@
 INSERT INTO
 users(first_name, last_name, email, password)
 VALUES
-    ('Mario', 'Bros', 'mario@nintendo.com', 'test'),
-    ('Luigi', 'Bros', 'luigi@nintendo.com', 'test'),
+    ('Mario', 'Bros', 'ahmed@movieknight.com', 'test'),
+    ('Luigi', 'Bros', 'safi@movieknight.com', 'test'),
     (
         'Princess',
         'Peach',

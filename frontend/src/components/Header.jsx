@@ -5,7 +5,7 @@ import Profile from "./Profile";
 
 export const Header = () => {
   return (
-    <header className = 'header'>
+    <header className = 'headers'>
       <div className="container">
         <div className="inner-content">
           <div className="brand">

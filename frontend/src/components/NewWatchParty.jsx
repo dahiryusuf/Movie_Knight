@@ -5,7 +5,7 @@ import '../NewWatchParty.css'
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { GlobalContext } from "../context/GlobalState";
-import { Link} from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import TextField from '@mui/material/TextField';
@@ -20,13 +20,14 @@ import { DatePicker } from 'react-rainbow-components';
 import Spinner from 'react-bootstrap/Spinner'
 import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 import { withTheme } from '@emotion/react';
+import { Textarea } from 'react-rainbow-components';
 
 export default function NewWatchParty() {
   const generateRandomString = () => {
     let ranId = (Math.random() + 1).toString(36).substring(7);
     return ranId;
   };
-  
+  const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
   const [value, onChange] = useState(new Date());
   const [link, setLink] = useState(generateRandomString());
@@ -55,6 +56,9 @@ export default function NewWatchParty() {
   };
   const containerStyles = {
     maxWidth: 400
+};
+const containerStyle = {
+  maxWidth: 700,
 };
   const handleNext = () => {
     let newSkipped = skipped;
@@ -207,7 +211,7 @@ poster={movie.poster_path}
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
           {activeStep === 0 && ( <><br/> {watched.length < 10 && (<h2> Pick the movies for your watch party</h2>)} {watched.length >= 10 && (<><h4>You picked:</h4> <div className="movie-grid">
     {parsedMovies}
-    </div> </>)} <br/> <br/>  <Link  className="btn btn-primary" to= {`/pickmovie`} >pick movies</Link> <br/> </>)}
+    </div> </>)} <br/> <br/> {watched.length < 10 ? <Link  className="btn btn-primary" to= {`/pickmovie`} > Pick movies </Link>  : <Link  className="btn btn-primary" to= {`/pickmovie`} > Edit selected movies </Link> }<br/> </>)}
     {activeStep === 1 && ( <><br/> <h2> Pick the date and add a message to your watch party</h2>   <br/> <div style = {{ display: 'flex', flexDirection: 'row'}}>    <div
         className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
         style={containerStyles}
@@ -218,17 +222,21 @@ poster={movie.poster_path}
             onChange={onChange}
         /> 
         </div>   
-    <div style = {{ paddingLeft: '150px', paddingTop: '10px'}}>
-      <TextField
-          id="outlined-multiline-flexible"
-          label="Message"
-          multiline
-          maxRows={4}
-          value={values}
-          onChange={handleChange}
-        /></div></div> </>)}
+    <div style = {{ paddingLeft: '250px'}}>
+    <div
+        className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
+        style={containerStyle}
+    >
+          <Textarea
+        id="example-textarea-1"
+        label="Add your message"
+        rows={4}
+        placeholder="Bring your own popcorn"
+        value={values}
+        onChange={handleChange}
+    /></div></div></div></>)}
          {activeStep === 2 && ( <><h2> Your all done click below to generate your link </h2> <br/> <br/> {loading ? <Button variant="contained" onClick={handleSubmit} size="lg" > 
-  Generate Link </Button> :   <Button variant="contained" disabled>
+  Generate Link </Button> : <Button variant="contained" disabled>
     <Spinner
       as="span"
       animation="grow"
@@ -240,8 +248,9 @@ poster={movie.poster_path}
   </Button>}  <MyVerticallyCenteredModal
         link = {link}
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={() => navigate("/watchparties")}
       />  </>)}
+     
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
@@ -253,12 +262,12 @@ poster={movie.poster_path}
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+              <Button color="inherit"  onClick={handleSkip} sx={{ mr: 1 }}>
                 Skip
               </Button>
             )}
 
-            <Button onClick={handleNext}>
+            <Button onClick={handleNext} size = 'lg'>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button>
           </Box>

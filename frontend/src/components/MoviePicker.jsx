@@ -7,23 +7,25 @@ import '../MoviePicker.css'
 
 export default function MoviePicker() {
   const [ip, setIP] = useState('');
+  const [message, setMessage] = useState('');
+  const [date, setDate] = useState();
   const [movies, setMovies] = useState([]);
   const [index, setIndex] = useState();
   const movi = [];
-  
+
+  let { id } = useParams();
   //creating function to load ip address from the API
-  const getData = () => {
+  const getinfo = () => {
     axios.get('https://geolocation-db.com/json/').then((res,req) => {
     // console.log(res.data);
     setIP(res.data.IPv4)
   })
   }
-  let { id } = useParams();
   let urls = 0
   console.log(id);
   useEffect(() => {
     axios.get(`http://localhost:3001/api/users/moviepicker/${id}`).then((res,req) => {
-    console.log("data",res.data[0].id);
+    console.log("data",res.data[0]);
     urls = res.data[0].id
     setIndex(res.data[0].id)
     axios.get(`http://localhost:3001/api/users/movielist/${urls}`).then((res,req) => {
@@ -38,12 +40,21 @@ setMovies(movi)
 })
 })
   }, [])
+  // const getData = () => {
+  //   console.log("i",index);
+  //   axios.get(`http://localhost:3001/api/users/watchparties/${index}`).then((res,req) => {
+  //   // console.log(res.data);
+  //   setMessage(res.data)
+  //   setDate(res.data.date)
+  // })
+  // }
   useEffect( () => {
     //passing getData method to the lifecycle method
-    getData()
-  
+    // getData()
+    getinfo()
+    
   }, [])
-  console.log(movies);
+  console.log("message",message);
   const characters = movies
   const [lastDirection, setLastDirection] = useState()
 

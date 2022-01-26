@@ -82,7 +82,7 @@ export default function PickMovie(props) {
     Done
   </Button>{' '}
   <Button variant="primary" onClick={handleShow} size="lg" >
-   Remove a Movie
+   Picked Movies
   </Button>{' '}
   <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>

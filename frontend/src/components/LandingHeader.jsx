@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const LandingHeader = () => {
   return (
-    <header>
+    <header className = 'headers'>
       <div className="container">
         <div className="inner-content">
           <div className="brand">

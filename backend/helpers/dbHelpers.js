@@ -34,9 +34,10 @@ module.exports = (db) => {
           .catch(err => err);
   }
   const addWatchParty = (link, message, date, userId) => {
+      const winner = 'https://github.com/dahiryusuf/final_project/blob/hufan/frontend/public/shutterstock_1074043505.jpg?raw=true'
     const query = {
-        text: `INSERT INTO watch_parties(link, messages, party_date, user_id) VALUES ($1, $2, $3, $4) RETURNING *` ,
-        values: [link, message, date, userId]
+        text: `INSERT INTO watch_parties(link, messages, party_date, winner, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *` ,
+        values: [link, message, date, winner, userId]
   }       
         return db.query(query)
         .then(result => result.rows[0])
