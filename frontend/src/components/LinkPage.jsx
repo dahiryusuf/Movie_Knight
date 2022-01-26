@@ -45,7 +45,7 @@ import {
 } from "react-share";
 export default function LinkPage(props) {
   let { id } = useParams();
-  const shareUrl = `http://localhost:3002/moviepicker/${props.link}`;
+  const shareUrl = `http://localhost:3000/moviepicker/${props.link}`;
     const title = 'MovieKnight';
   return (
     <div>

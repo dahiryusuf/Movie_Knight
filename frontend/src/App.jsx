@@ -35,7 +35,7 @@ function App() {
   const [drama, setDrama] = useState([]);
   const [family, setFamily] = useState([]);
   const [fantasy, setFantasy] = useState([]);
-  const [history, setHistory] = useState([]);
+  const [horror, setHorror] = useState([]);
   const [mystery, setMystery] = useState([]);
   const [romance, setRomance] = useState([]);
   const [thriller, setThriller] = useState([]);
@@ -74,6 +74,10 @@ setWatchlist(array)
     axios.get("https://api.themoviedb.org/3/discover/movie?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=12&with_watch_monetization_types=flatrate").then((res,req) => {
     setAdventure(res.data.results)})
   }, [])
+  useEffect(() => {
+    axios.get("https://api.themoviedb.org/3/discover/movie?api_key=79ea73dd8ffddae85c10ba47e73e9093&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=27&with_watch_monetization_types=flatrate").then((res,req) => {
+    setHorror(res.data.results)})
+  }, [])
 
   return (
     <div className="App">
@@ -87,7 +91,7 @@ setWatchlist(array)
     <Header/>
      <Carousal movie = {movie}></Carousal>
      <Search/>
-       <GenreTabs movie = {movie} action ={action} adventure ={adventure} ></GenreTabs>
+       <GenreTabs movie = {movie} action ={action} adventure ={adventure} horror ={horror} ></GenreTabs>
     </div>
 );
          </div>} >
@@ -109,7 +113,7 @@ setWatchlist(array)
              ></Route>
               <Route path = "/pickmovie" element = { <>
             <PickMovie ></PickMovie>
-            <GenreTabs movie = {movie} action ={action} adventure ={adventure} watchlist = {watchlist} page = {true} ></GenreTabs>
+            <GenreTabs movie = {movie} action ={action} adventure ={adventure} horror ={horror} watchlist = {watchlist} page = {true} ></GenreTabs>
             </> }
              ></Route>
                   <Route path = "/moviepicker/:id" element = { 

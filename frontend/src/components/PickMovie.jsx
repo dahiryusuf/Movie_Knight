@@ -28,14 +28,14 @@ export default function PickMovie(props) {
   
     let array = []
     let now = 0
-    let index = 10 - watched.length
+    let index = 5 - watched.length
     let check = true
-    if(watched.length >= 10){
+    if(watched.length >= 5){
       check = false
       now = 100
     }
     else{
-      now = watched.length * 10;
+      now = watched.length * 20;
     }
     
     useEffect(() => {

@@ -86,9 +86,17 @@ parsedWatchlist = props.watchlist.map(movie => <MovieCard key={movie.id}
          id = {movie.id}
          page = {props.page} 
          />);
+         console.log(props)
 
-         const tabArray = ["Trending", "Action","Adventure"]
-         const tabArrayList = tabArray.map(item => <Tab>{item}</Tab>)
+         const parsedHorror = props.horror.map(movie => <MovieCard key={movie.id}
+          poster={movie.poster_path} 
+           title={movie.title} 
+           vote_average = {movie.vote_average}
+           release_date = {movie.release_date}
+           overview = {movie.overview}
+           id = {movie.id}
+           page = {props.page} 
+           />);
  
 
   return (
@@ -174,7 +182,7 @@ parsedWatchlist = props.watchlist.map(movie => <MovieCard key={movie.id}
   <div className="header">
   </div>
     <div className="movie-grid">
-    {parsedAction}
+    {parsedHorror}
     </div>
 
 </div>
@@ -286,7 +294,7 @@ parsedWatchlist = props.watchlist.map(movie => <MovieCard key={movie.id}
   <div className="header">
   </div>
     <div className="movie-grid">
-    {parsedAction}
+    {parsedHorror}
     </div>
 
 </div>
