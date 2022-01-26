@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import { MovieCard } from './MovieCard';
 import Calendar from 'react-calendar';
 import { padding } from '@mui/system';
-import { DatePicker } from 'react-rainbow-components';
+// import { DatePicker } from 'react-rainbow-components';
 import Spinner from 'react-bootstrap/Spinner'
 import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 import { withTheme } from '@emotion/react';
@@ -214,13 +214,13 @@ poster={movie.poster_path}
     </div> </>)} <br/> <br/> {watched.length < 10 ? <Link  className="btn btn-primary" to= {`/pickmovie`} > Pick movies </Link>  : <Link  className="btn btn-primary" to= {`/pickmovie`} > Edit selected movies </Link> }<br/> </>)}
     {activeStep === 1 && ( <><br/> <h2> Pick the date and add a message to your watch party</h2>   <br/> <div style = {{ display: 'flex', flexDirection: 'row'}}>    <div
         className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
-        style={containerStyles}
-    >   <DatePicker
-            value={value}
-            minDate={new Date(2021, 0, 4)}
-            label="Watch Party Date"
-            onChange={onChange}
-        /> 
+        style={containerStyles}> 
+      {/* <DatePicker */}
+    {/* //         value={value}
+    //         minDate={new Date(2021, 0, 4)}
+    //         label="Watch Party Date"
+    //         onChange={onChange}
+    //     />  */}
         </div>   
     <div style = {{ paddingLeft: '250px'}}>
     <div

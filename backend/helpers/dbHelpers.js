@@ -173,10 +173,10 @@ const getMoviePicks = (id) => {
         .catch(err => err);
 
 }
-const updateWatchParty = (poster_path, id) => {
+const updateWatchParty = (poster_path,movie_id, id) => {
     const query = {
         text: (`UPDATE watch_parties
-        SET winner =${poster_path}
+        SET winner =${poster_path} , winner_movie_id = ${movie_id}
         WHERE id = ${id};`)
   }       
         return db.query(query)

@@ -32,6 +32,7 @@ const [watchparties, setWatchParties] = useState([]);
      message = {movie.messages}
      id={movie.id}
      poster_path={movie.winner}
+     movie = {movie.winner_movie_id}
      
      />);
 
