@@ -1,7 +1,7 @@
 INSERT INTO
 users(first_name, last_name, email, password)
 VALUES
-    ('Mario', 'Bros', 'ahmed@movieknight.com', 'test'),
+    ('Mario', 'Bros', 'layla@movieknight.com', 'test'),
     ('Luigi', 'Bros', 'safi@movieknight.com', 'test'),
     (
         'Princess',

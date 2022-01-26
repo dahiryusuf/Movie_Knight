@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import { MovieCard } from './MovieCard';
 import Calendar from 'react-calendar';
 import { padding } from '@mui/system';
-// import { DatePicker } from 'react-rainbow-components';
+import { DatePicker } from 'react-rainbow-components';
 import Spinner from 'react-bootstrap/Spinner'
 import MyVerticallyCenteredModal from './MyVerticallyCenteredModal';
 import { withTheme } from '@emotion/react';
@@ -117,11 +117,11 @@ const steps = ['Select Movies', 'Pick your date', 'Create your watch party'];
   event.preventDefault();
   
  }
-
+ console.log(value.toDateString())
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(message, value)
+
     // clearWatched()
  let ids = 0
  setLoading(false);
@@ -133,12 +133,12 @@ const steps = ['Select Movies', 'Pick your date', 'Create your watch party'];
  }, 2700);
 
  
-    
+    let date = value.toDateString()
     axios.post('http://localhost:3001/api/newparty', {
       link,
       userId: cookies.Name,
       message: values,
-      date: value
+      date: date
     })
     .then(function (response) {
       console.log(response);
@@ -215,12 +215,12 @@ poster={movie.poster_path}
     {activeStep === 1 && ( <><br/> <h2> Pick the date and add a message to your watch party</h2>   <br/> <div style = {{ display: 'flex', flexDirection: 'row'}}>    <div
         className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
         style={containerStyles}> 
-      {/* <DatePicker */}
-    {/* //         value={value}
-    //         minDate={new Date(2021, 0, 4)}
-    //         label="Watch Party Date"
-    //         onChange={onChange}
-    //     />  */}
+       <DatePicker
+             value={value}
+          minDate={new Date(2021, 0, 4)}
+            label="Watch Party Date"
+          onChange={onChange}
+        /> 
         </div>   
     <div style = {{ paddingLeft: '250px'}}>
     <div
@@ -235,7 +235,7 @@ poster={movie.poster_path}
         value={values}
         onChange={handleChange}
     /></div></div></div></>)}
-         {activeStep === 2 && ( <><h2> Your all done click below to generate your link </h2> <br/> <br/> {loading ? <Button variant="contained" onClick={handleSubmit} size="lg" > 
+         {activeStep === 2 && ( <><h2> You're all done click below to generate your link </h2> <br/> <br/> {loading ? <Button variant="contained" onClick={handleSubmit} size="lg" > 
   Generate Link </Button> : <Button variant="contained" disabled>
     <Spinner
       as="span"
@@ -268,7 +268,7 @@ poster={movie.poster_path}
             )}
 
             <Button onClick={handleNext} size = 'lg'>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              {activeStep === steps.length - 1 ? <></> : 'Next'}
             </Button>
           </Box>
         </React.Fragment>
