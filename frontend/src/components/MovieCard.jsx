@@ -64,6 +64,7 @@ const handleRemove = (event) => {
     .catch(function (error) {
       console.log(error);
     });
+
     handleClose()
   }
   
@@ -94,9 +95,9 @@ const handleRemove = (event) => {
       />
       {!props.pick && <>
          <div className="inner-card-controls2">
-        <button className="btn btn-main2" onClick={handleSubmit} >
+       {!index && <button className="btn btn-main2" onClick={handleSubmit} >
        {element}
-          </button>
+          </button>}
     </div>
     </>
 }

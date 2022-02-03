@@ -1,6 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Profile from "./Profile";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOutAlt, faChessKnight} from '@fortawesome/free-solid-svg-icons'
+
+const element = <FontAwesomeIcon size='1x' icon={faSignOutAlt
+} />
+const elements = <FontAwesomeIcon size='1x' icon={faChessKnight} />
 
 
 export const Header = () => {
@@ -9,7 +14,7 @@ export const Header = () => {
       <div className="container">
         <div className="inner-content">
           <div className="brand">
-           <Link to="/home">   MovieKnight</Link>
+           <Link to="/home">  {elements} &nbsp;MovieKnight</Link>
           </div>
 
           <ul className="nav-links">
@@ -18,17 +23,21 @@ export const Header = () => {
             </li>
 
             <li>
-            <Link to="/watchparties">  Watch Parties</Link>
+            <Link to="/watchparties">  Movie Knights</Link>
             </li>
 
             <li className="btn btn-main">
            
-            <Link to="/newparty">New Party</Link>
+            <Link to="/newparty">Create</Link>
      
-
+            
 
              
             </li>
+            <li>
+            <Link to="/">  {element}</Link>
+            </li>
+
           </ul>
           
         </div>

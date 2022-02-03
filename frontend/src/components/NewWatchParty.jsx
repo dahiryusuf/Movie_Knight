@@ -95,7 +95,7 @@ const containerStyle = {
   };
 
 
-const steps = ['Select Movies', 'Add the details', 'Create your watch party'];
+const steps = ['Select Movies', 'Add the details', 'Create your movie knight'];
 
   let array =[]
   useEffect(() => {
@@ -175,7 +175,7 @@ poster={movie.poster_path}
 
   return (
     <div >
-        <h1> Create A New Watch Party</h1>
+        <h1> &nbsp; &nbsp; Create A New Movie Knight</h1>
      
  
     <Box sx={{padding: '40px',width: '100%' }}>
@@ -211,7 +211,7 @@ poster={movie.poster_path}
       ) : (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-          {activeStep === 0 && ( <><br/> {watched.length < 5 && (<h2> Pick the movies for your watch party</h2>)} {watched.length >= 5 && (<><h4>Your Selections:</h4> <div className="movie-grid">
+          {activeStep === 0 && ( <><br/> {watched.length < 5 && (<h2> Pick the movies for your movie knight</h2>)} {watched.length >= 5 && (<><h4>Your Selections:</h4> <div className="movie-grid">
     {parsedMovies}
     </div> </>)} <br/> <br/> {watched.length <5  ? <Link  className="btn btn-primary" to= {`/pickmovie`} > Pick movies </Link>  : <Link  className="btn btn-primary" to= {`/pickmovie`} > Edit selected movies </Link> }<br/> </>)}
     {activeStep === 1 && ( <><br/> <h2> &ensp;&emsp;Pick a date &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp; Add a message</h2>   <br/> <div style = {{ display: 'flex', flexDirection: 'row'}}>    <div
@@ -220,7 +220,7 @@ poster={movie.poster_path}
        <DatePicker
              value={value}
           minDate={new Date(2021, 0, 4)}
-            label="Watch Party Date"
+            label="Movie Knight Date"
           onChange={onChange}cd f 
         /> 
         </div>   

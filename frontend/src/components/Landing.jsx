@@ -6,7 +6,7 @@ export default function Landing() {
     <div>
       <LandingHeader/>
       <header id="showcase">
-    <h1>Welcome To Movie Knight</h1>
+    <h1 className = "hh">Welcome To Movie Knight</h1>
     <p>Save time choosing movies and more time watching them</p>
     <a href="/signin" class="button">Join Now</a>
   </header>

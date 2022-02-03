@@ -43,7 +43,7 @@ const [watchparties, setWatchParties] = useState([]);
 
   return <div>
 <Header/>
-<h1> &emsp; Layla's Watch Parties </h1>
+<h1> &emsp; Layla's Movie Knights </h1>
 <div className="movie-grid">
 {parsedMovies}
 </div>

@@ -40,21 +40,21 @@ setMovies(movi)
 })
 })
   }, [])
-  // const getData = () => {
-  //   console.log("i",index);
-  //   axios.get(`http://localhost:3001/api/users/watchparties/${index}`).then((res,req) => {
-  //   // console.log(res.data);
-  //   setMessage(res.data)
-  //   setDate(res.data.date)
-  // })
-  // }
+  const getData = () => {
+    console.log("i",index);
+    axios.get(`http://localhost:3001/api/users/watchparties/1`).then((res,req) => {
+    // console.log(res.data);
+    setMessage(res.data[res.data.length-1].messages)
+    setDate(res.data[res.data.length-1].party_date)
+  })
+  }
   useEffect( () => {
     //passing getData method to the lifecycle method
-    // getData()
+    getData()
     getinfo()
     
   }, [])
-  console.log("message",message);
+  console.log("message",date);
   const characters = movies
   const [lastDirection, setLastDirection] = useState()
 
@@ -79,10 +79,15 @@ setMovies(movi)
   }
 
   return (
+    <>
     <div className = 'root'>
+      <div className ="h">
+    <h3 > Layla has invited you to a movie knight on {date} and says {message}</h3>
+    </div>
     <div>
       <link href='https://fonts.googleapis.com/css?family=Damion&display=swap' rel='stylesheet' />
       <link href='https://fonts.googleapis.com/css?family=Alatsi&display=swap' rel='stylesheet' />
+     
       <h1>Movie Picker</h1>
       <h2>Swipe right if you want to watch the movie</h2>
       <h2>Swipe left if you don't</h2>
@@ -96,11 +101,16 @@ setMovies(movi)
           </TinderCard>
           
         )}
+        <br />
+        <br />
+         <h4>You're all done you can exit the page</h4>
       </div>
     
       {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
     </div>
     </div>
+    
+    </>
   )
 }
   
