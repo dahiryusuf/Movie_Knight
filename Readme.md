@@ -6,13 +6,15 @@ This application was built with JS, React, and Axios for the front-end with Node
 
 ## Final Product
 
-!["Screenshot of main page of app"](https://github.com/dahiryusuf/scheduler/blob/master/docs/main-page.png?raw=true)
+!["Screenshot of main page of app"](https://github.com/dahiryusuf/Movie_Knight/blob/master/frontend/public/Screen%20Shot%202022-02-02%20at%208.28.03%20PM.png?raw=true)
 
 
-!["Screenshot of creating a new appointment"](https://github.com/dahiryusuf/scheduler/blob/master/docs/new-appointment.png?raw=true)
+!["Screenshot of movie selection"](https://github.com/dahiryusuf/Movie_Knight/blob/master/frontend/public/Screen%20Shot%202022-02-02%20at%208.28.24%20PM.png?raw=true)
 
 
-!["Screenshot of deleting a appointment"](https://github.com/dahiryusuf/scheduler/blob/master/docs/delete-appointment.png?raw=true)
+!["Screenshot of creating a Movie Knight"](https://github.com/dahiryusuf/Movie_Knight/blob/master/frontend/public/Screen%20Shot%202022-02-02%20at%208.39.50%20PM.png?raw=true)
+
+!["Screenshot of page to pick movies"](https://github.com/dahiryusuf/Movie_Knight/blob/master/frontend/public/Screen%20Shot%202022-02-02%20at%208.38.20%20PM.png?raw=true)
 
 ## Getting Started
 
